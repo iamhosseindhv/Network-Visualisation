@@ -1,2 +1,2 @@
 # Network Visualisation 
-A simple network (graph) visulisation using d3
+A simple network (graph) visualisation using d3
