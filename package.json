@@ -1,0 +1,41 @@
+{
+  "name": "react-express-boilerplate",
+  "description": "Boilerplate for an react+express app, tailored to my needs",
+  "version": "1.0.0",
+  "author": {
+    "name": "Hossein Dehnokhalaji",
+    "email": "hossein.dehnavi98@yahoo.com",
+    "url": "https://www.linkedin.com/in/iamhosseindhv/"
+  },
+  "license": "MIT",
+  "scripts": {
+    "app": "cd app && npm start",
+    "server": "cd server && nodemon www",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run app\""
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "hbs": "~4.0.1",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.17.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamhosseindhv/React-Express-boilerplate.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "npm",
+    "express",
+    "create-react-app",
+    "boilerplate",
+    "react"
+  ]
+}
