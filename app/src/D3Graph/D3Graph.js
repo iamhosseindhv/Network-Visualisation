@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Graph } from '../react-d3-graph';
-import data from '../data';
 
 const defaultConfig = {
     graph: {
@@ -25,7 +24,8 @@ export default class D3Graph extends Component {
         super(props);
         this.state = {
             config: this.createConfig(),
-            data,
+            data: {},
+            renderGraph: false,
         };
     }
 
@@ -50,6 +50,13 @@ export default class D3Graph extends Component {
     componentWillReceiveProps = newProps => {
         const config = this.createConfig(newProps.config);
         this.setState({ config: config });
+        //if there is data
+        if (Object.keys(newProps.data).length !== 0) {
+            this.setState({
+                data: newProps.data,
+                renderGraph: true,
+            });
+        }
     }
 
     createConfig = (newConfig = {}) => {
@@ -71,26 +78,34 @@ export default class D3Graph extends Component {
 
     render() {
 
-        const data = {
-            nodes: this.state.data.nodes,
-            links: this.state.data.links
-        };
+        if (this.state.renderGraph) {
+            const data = {
+                nodes: this.state.data.nodes,
+                links: this.state.data.links
+            };
+            const graphProps = {
+                id: 'graph',
+                data,
+                config: this.state.config,
+                onClickNode: this.onClickNode,
+                onDoubleClickNode: this.onDoubleClickNode,
+                onClickLink: this.onClickLink,
+                onMouseOverNode: this.onMouseOverNode,
+                onMouseOutNode: this.onMouseOutNode,
+                onMouseOverLink: this.onMouseOverLink,
+                onMouseOutLink: this.onMouseOutLink
+            };
+            return (
+                <Graph ref="graph" {...graphProps} />
+            );
 
-        const graphProps = {
-            id: 'graph',
-            data,
-            config: this.state.config,
-            onClickNode: this.onClickNode,
-            onDoubleClickNode: this.onDoubleClickNode,
-            onClickLink: this.onClickLink,
-            onMouseOverNode: this.onMouseOverNode,
-            onMouseOutNode: this.onMouseOutNode,
-            onMouseOverLink: this.onMouseOverLink,
-            onMouseOutLink: this.onMouseOutLink
-        };
+        } else {
+            //render a page which shows loading and saying that data is on it's way
+            return (
+                <h2>waiting for data...</h2>
+            );
+        }
 
-        return (
-            <Graph ref="graph" {...graphProps} />
-        );
+
     }
 }
