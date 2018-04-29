@@ -27,15 +27,22 @@ const muiTheme = createMuiTheme({
 export default class App extends Component {
 	constructor(properties) {
 		super(properties)
-
 	}
 
+	state = {
+		config: 'sss',
+	}
+
+	onFormChange = data => {
+		this.setState({ config: data });
+	}
+	
 	render() {
 		return (
-			// <D3Graph />
 			<MuiThemeProvider muiTheme={muiTheme}>
-				<Layout>
+				<Layout onFormChange={this.onFormChange}>
 					<D3Graph />
+					{/* <D3Graph config={this.state.config}/> */}
 				</Layout>
 			</MuiThemeProvider>
 		);
