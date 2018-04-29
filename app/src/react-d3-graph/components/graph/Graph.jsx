@@ -59,6 +59,10 @@ const D3_CONST = {
  * const onClickNode = function(nodeId) {
  *      window.alert('Clicked node ${nodeId}');
  * };
+ * 
+ * * const onDoubleClickNode = function(nodeId) {
+ *      window.alert('Double clicked node ${nodeId}');
+ * };
  *
  * const onMouseOverNode = function(nodeId) {
  *      window.alert(`Mouse over node ${nodeId}`);
@@ -85,6 +89,7 @@ const D3_CONST = {
  *      data={data}
  *      config={myConfig}
  *      onClickNode={onClickNode}
+ *      onDoubleClickNode={onDoubleClickNode}
  *      onClickLink={onClickLink}
  *      onMouseOverNode={onMouseOverNode}
  *      onMouseOutNode={onMouseOutNode}
@@ -187,7 +192,7 @@ export default class Graph extends React.Component {
             d3Zoom()
                 .scaleExtent([this.state.config.minZoom, this.state.config.maxZoom])
                 .on('zoom', this._zoomed)
-        );
+        ).on("dblclick.zoom", null);
 
     /**
      * Handler for 'zoom' event within zoom config.
@@ -201,6 +206,35 @@ export default class Graph extends React.Component {
         this.state.config.panAndZoom && this.setState({ transform: transform.k });
     };
 
+
+    /**
+     * Handles click on a node event.
+     * @param  {string} id - id of the node that participates in the event.
+     * @returns {undefined}
+     */
+    onClickNode = id => {
+        this.props.onClickNode && this.props.onClickNode(id);
+    };
+
+    /**
+     * Handles double click on a node event.
+     * @param  {string} id - id of the node that participates in the event.
+     * @returns {undefined}
+     */
+    onDoubleClickNode = id => {
+        this.props.onDoubleClickNode && this.props.onDoubleClickNode(id);
+
+        const doHighlight = !this.state.isFocused;
+        const highlightedNode = this.state.highlightedNode;
+        if (highlightedNode !== ''){
+            this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(highlightedNode, doHighlight);
+            this.setState({ highlightedNode: '' });
+        } else {
+            this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, doHighlight);
+        }
+        this.setState({ isFocused: doHighlight });
+    };
+
     /**
      * Handles mouse over node event.
      * @param  {string} id - id of the node that participates in the event.
@@ -208,8 +242,7 @@ export default class Graph extends React.Component {
      */
     onMouseOverNode = id => {
         this.props.onMouseOverNode && this.props.onMouseOverNode(id);
-
-        this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, true);
+        // this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, true);
     };
 
     /**
@@ -219,8 +252,7 @@ export default class Graph extends React.Component {
      */
     onMouseOutNode = id => {
         this.props.onMouseOutNode && this.props.onMouseOutNode(id);
-
-        this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, false);
+        // this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, false);
     };
 
     /**
@@ -300,6 +332,7 @@ export default class Graph extends React.Component {
         }
 
         this.state = graphHelper.initializeGraphState(this.props, this.state);
+        this.state.isFocused = false;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -362,7 +395,8 @@ export default class Graph extends React.Component {
         const { nodes, links } = graphRenderer.buildGraph(
             this.state.nodes,
             {
-                onClickNode: this.props.onClickNode,
+                onClickNode: this.onClickNode,
+                onDoubleClickNode: this.onDoubleClickNode,
                 onMouseOverNode: this.onMouseOverNode,
                 onMouseOut: this.onMouseOutNode
             },
