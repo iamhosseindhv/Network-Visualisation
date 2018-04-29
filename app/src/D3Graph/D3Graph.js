@@ -1,32 +1,28 @@
 import React, { Component } from 'react';
 import { Graph } from '../react-d3-graph';
+import { defaultConfig, createConfig } from './D3Graph.config';
 
-const defaultConfig = {
-    graph: {
-        nodeHighlightBehavior: true,
-        automaticRearrangeAfterDropNode: true,
-        highlightOpacity: 0.2,
-        height: 800,
-        width: 1200,
-    },
-    node: {
-        color: '#d3d3d3',
-        highlightColor: 'lightgreen',
-        size: 200,
-    },
-    link: {
-        highlightColor: '#484848'
-    }
-};
 
 export default class D3Graph extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            config: this.createConfig(),
+            config: createConfig(),
             data: {},
             renderGraph: false,
         };
+    }
+
+    componentWillReceiveProps = newProps => {
+        const config = createConfig(newProps.config);
+        this.setState({ config: config });
+        //if there is data
+        if (Object.keys(newProps.data).length !== 0) {
+            this.setState({
+                data: newProps.data,
+                renderGraph: true,
+            });
+        }
     }
 
     onClickNode = id => console.log(`Clicked node ${id}`);
@@ -46,35 +42,6 @@ export default class D3Graph extends Component {
     onMouseOutLink = (source, target) => {
         console.log(`Do something when mouse is out of link between ${source} and ${target}`);
     }
-
-    componentWillReceiveProps = newProps => {
-        const config = this.createConfig(newProps.config);
-        this.setState({ config: config });
-        //if there is data
-        if (Object.keys(newProps.data).length !== 0) {
-            this.setState({
-                data: newProps.data,
-                renderGraph: true,
-            });
-        }
-    }
-
-    createConfig = (newConfig = {}) => {
-        const mergedConfig = {
-            ...defaultConfig.graph,
-            ...newConfig.graph,
-            node: {
-                ...defaultConfig.node,
-                ...newConfig.node,
-            },
-            link: {
-                ...defaultConfig.link,
-                ...newConfig.link,
-            },
-        };
-        return mergedConfig;
-    }
-
 
     render() {
 
