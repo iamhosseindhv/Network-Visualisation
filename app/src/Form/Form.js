@@ -35,8 +35,8 @@ const constants = {
 
 
 class Form extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             graph: {
                 staticGraph: defaultSetting.staticGraph,
@@ -134,6 +134,10 @@ class Form extends Component {
                             label="Static Graph"
                         />
                     </FormGroup>
+                </ListItem>
+                <Divider />
+                <ListItem>
+                    <ListItemText primary="Configurations" />
                 </ListItem>
             </div>
         )
