@@ -63,7 +63,7 @@ const styles = theme => ({
         }),
         width: theme.spacing.unit * 7,
         [theme.breakpoints.up('sm')]: {
-            width: theme.spacing.unit * 9,
+            width: theme.spacing.unit * 8,
         },
     },
     content: {
@@ -92,6 +92,7 @@ class Layout extends React.Component {
             children,
             classes,
             theme,
+            onFormChange,
         } = this.props;
 
         return (
@@ -112,14 +113,16 @@ class Layout extends React.Component {
                     classes={{ paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose), }}
                     open={this.state.open}
                 >
+                    {/* Form stuff start - Form onChange={onFormChange} */}
                     <div className={classes.toolbar}>
                         <IconButton onClick={this.handleDrawerToggle}>
-                            <ChevronRightIcon />
+                            {this.state.open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                         </IconButton>
                     </div>
                     <Divider />
                     <p>Menu Item is here</p>
                     <Divider />
+                    {/* Form stuff end */}
 
                 </Drawer>
 
@@ -146,6 +149,10 @@ Layout.propTypes = {
      * @ignore
      */
     theme: PropTypes.object.isRequired,
+    /**
+     * @param {object} event The event source of the callback
+     */
+    onFormChange: PropTypes.func,
 };
 
 
