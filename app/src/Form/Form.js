@@ -116,10 +116,6 @@ class Form extends Component {
                         />
                     </FormGroup>
                 </ListItem>
-                <Divider />
-                <ListItem>
-                    <ListItemText primary="Configurations" />
-                </ListItem>
             </div>
         )
     }

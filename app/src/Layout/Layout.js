@@ -13,7 +13,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import Form from '../Form/Form';
-// import Filters from '../Filters/Filters';
+import Filters from '../Filters/Filters';
 
 const drawerWidth = 320;
 const styles = theme => ({
@@ -121,11 +121,10 @@ class Layout extends React.Component {
                         </IconButton>
                     </div>
 
-                    {/* Configuration stuff start */}
+                    {/* Configurations */}
                     <Form onChange={onChangeForm} />
-
-                    {/* Search and filters start */}
-                    {/* <Filters onChangeData={onChangeData} /> */}
+                    {/* Search and filters */}
+                    <Filters onChangeData={onChangeData} />
 
                 </Drawer>
 
