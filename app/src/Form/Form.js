@@ -69,6 +69,8 @@ class Form extends Component {
                 link[name] = event.target.checked;
                 this.setState({ link }, () => this.formDidChange());
                 break;
+            default:
+                break;
         }
     };
 
