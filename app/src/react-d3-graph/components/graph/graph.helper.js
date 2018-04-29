@@ -311,6 +311,7 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
         id: node.id,
         label: node[config.node.labelProperty] || node.id,
         onClickNode: nodeCallbacks.onClickNode,
+        onDoubleClickNode: nodeCallbacks.onDoubleClickNode,
         onMouseOverNode: nodeCallbacks.onMouseOverNode,
         onMouseOut: nodeCallbacks.onMouseOut,
         opacity,
