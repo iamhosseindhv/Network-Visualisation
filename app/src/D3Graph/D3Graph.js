@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Graph } from '../react-d3-graph';
-import { defaultConfig, createConfig } from './D3Graph.config';
+import { createConfig } from './D3Graph.config';
 
 
 export default class D3Graph extends Component {

@@ -48,14 +48,15 @@ export default class App extends Component {
 	};
 
 
-	onChangeForm = data => { this.setState({ graphConfig: data }) }
+	onChangeForm = config => { this.setState({ graphConfig: config }) }
+	
+	onChangeData = data => { this.setState({ graphData: data }) }
 
 	render() {
 		return (
 			<MuiThemeProvider theme={muiTheme}>
-				<Layout onChangeForm={this.onChangeForm}>
+				<Layout onChangeForm={this.onChangeForm} onChangeData={this.onChangeData}>
 					<D3Graph data={this.state.graphData} config={this.state.graphConfig} />
-					{/* <D3Graph config={this.state.graphConfig} /> */}
 				</Layout>
 			</MuiThemeProvider>
 		);

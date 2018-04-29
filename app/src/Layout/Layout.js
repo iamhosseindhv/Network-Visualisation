@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import List from 'material-ui/List';
-import MenuIcon from '@material-ui/icons/Menu';
+// import Typography from 'material-ui/Typography';
+// import AppBar from 'material-ui/AppBar';
+// import Toolbar from 'material-ui/Toolbar';
+// import List from 'material-ui/List';
+// import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from 'material-ui/IconButton';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import Form from '../Form/Form';
+// import Filters from '../Filters/Filters';
 
 const drawerWidth = 320;
-
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -91,13 +94,14 @@ class Layout extends React.Component {
             classes,
             theme,
             onChangeForm,
+            onChangeData,
         } = this.props;
 
         return (
             <div className={classes.root}>
                 {/* <AppBar position="absolute" className={classNames(classes.appBar, this.state.open && classes.appBarShift)} >
                     <Toolbar disableGutters={!this.state.open}>
-                        <IconButton color="inherit" aria-label="open drawer" onClick={this.handleDrawerOpen}
+                        <IconButton color="inherit" aria-label="open drawer" onClick={this.handleDrawerToggle}
                             className={classNames(classes.menuButton, this.state.open && classes.hide)}
                         >
                             <MenuIcon />
@@ -111,13 +115,17 @@ class Layout extends React.Component {
                     classes={{ paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose), }}
                     open={this.state.open}
                 >
-                    {/* Form stuff start - Form onChange={onChangeForm} */}
-                    <Form
-                        open={this.state.open}
-                        onToggleOpen={this.handleDrawerToggle}
-                        onChange={onChangeForm}
-                    />
-                    {/* Form stuff end */}
+                    <div className={classes.toolbar}>
+                        <IconButton onClick={this.handleDrawerToggle}>
+                            {this.state.open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        </IconButton>
+                    </div>
+
+                    {/* Configuration stuff start */}
+                    <Form onChange={onChangeForm} />
+
+                    {/* Search and filters start */}
+                    {/* <Filters onChangeData={onChangeData} /> */}
 
                 </Drawer>
 
@@ -148,6 +156,10 @@ Layout.propTypes = {
      * @param {object} event The event source of the callback
      */
     onFormChange: PropTypes.func,
+    /**
+     * @param {object} event The event source of the callback
+     */
+    onChangeData: PropTypes.func,
 };
 
 

@@ -1,26 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import classNames from 'classnames';
 import Divider from 'material-ui/Divider';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import IconButton from 'material-ui/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
-
-const styles = theme => ({
-    toolbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '0 8px',
-        ...theme.mixins.toolbar,
-    },
-})
 
 const defaultSetting = {
     renderLabel: true,
@@ -91,19 +76,13 @@ class Form extends Component {
 
     render() {
         const {
+            children,
             classes,
             theme,
-            open,
-            onToggleOpen,
         } = this.props;
 
         return (
             <div>
-                <div className={classes.toolbar}>
-                    <IconButton onClick={onToggleOpen}>
-                        {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </div>
                 <ListItem>
                     <ListItemIcon>
                         <InboxIcon />
@@ -160,17 +139,9 @@ Form.propTypes = {
      */
     theme: PropTypes.object.isRequired,
     /**
-     * Boolean value to open/close the drawer on the left
-     */
-    open: PropTypes.bool,
-    /**
-     * @param {object} event The event source of the callback
-     */
-    onToggleOpen: PropTypes.func,
-    /**
      * @param {object} event The event source of the callback
      */
     onChange: PropTypes.func,
 };
 
-export default withStyles(styles, { withTheme: true })(Form);
+export default withStyles({ withTheme: true })(Form);
