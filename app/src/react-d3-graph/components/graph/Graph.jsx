@@ -264,11 +264,10 @@ export default class Graph extends React.Component {
     onMouseOverLink = (source, target) => {
         this.props.onMouseOverLink && this.props.onMouseOverLink(source, target);
 
-        if (this.state.config.linkHighlightBehavior) {
-            this.state.highlightedLink = { source, target };
-
-            this._tick();
-        }
+        // if (this.state.config.linkHighlightBehavior) {
+        //     this.state.highlightedLink = { source, target };
+        //     this._tick();
+        // }
     };
 
     /**
@@ -280,11 +279,10 @@ export default class Graph extends React.Component {
     onMouseOutLink = (source, target) => {
         this.props.onMouseOutLink && this.props.onMouseOutLink(source, target);
 
-        if (this.state.config.linkHighlightBehavior) {
-            this.state.highlightedLink = undefined;
-
-            this._tick();
-        }
+        // if (this.state.config.linkHighlightBehavior) {
+        //     this.state.highlightedLink = undefined;
+        //     this._tick();
+        // }
     };
 
     /**
