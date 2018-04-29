@@ -7,11 +7,9 @@ import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import List from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import IconButton from 'material-ui/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
+import Form from '../Form/Form';
 
 const drawerWidth = 320;
 
@@ -63,7 +61,7 @@ const styles = theme => ({
         }),
         width: theme.spacing.unit * 7,
         [theme.breakpoints.up('sm')]: {
-            width: theme.spacing.unit * 8,
+            width: theme.spacing.unit * 9,
         },
     },
     content: {
@@ -92,7 +90,7 @@ class Layout extends React.Component {
             children,
             classes,
             theme,
-            onFormChange,
+            onChangeForm,
         } = this.props;
 
         return (
@@ -113,15 +111,12 @@ class Layout extends React.Component {
                     classes={{ paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose), }}
                     open={this.state.open}
                 >
-                    {/* Form stuff start - Form onChange={onFormChange} */}
-                    <div className={classes.toolbar}>
-                        <IconButton onClick={this.handleDrawerToggle}>
-                            {this.state.open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                        </IconButton>
-                    </div>
-                    <Divider />
-                    <p>Menu Item is here</p>
-                    <Divider />
+                    {/* Form stuff start - Form onChange={onChangeForm} */}
+                    <Form
+                        open={this.state.open}
+                        onToggleOpen={this.handleDrawerToggle}
+                        onChange={onChangeForm}
+                    />
                     {/* Form stuff end */}
 
                 </Drawer>
@@ -150,11 +145,10 @@ Layout.propTypes = {
      */
     theme: PropTypes.object.isRequired,
     /**
-     * @param {object} event The event source of the callback
-     */
+* @param {object} event The event source of the callback
+    */
     onFormChange: PropTypes.func,
 };
 
 
 export default withStyles(styles, { withTheme: true })(Layout);
-

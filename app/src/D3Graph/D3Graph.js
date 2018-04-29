@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Graph } from '../react-d3-graph';
 import data from '../data';
 
-const graphConfig = {
-    nodeHighlightBehavior: true,
-    automaticRearrangeAfterDropNode: true,
-    highlightOpacity: 0.2,
-    height: 800,
-    width: 1200,
+const defaultConfig = {
+    graph: {
+        nodeHighlightBehavior: true,
+        automaticRearrangeAfterDropNode: true,
+        highlightOpacity: 0.2,
+        height: 800,
+        width: 1200,
+    },
     node: {
         color: '#d3d3d3',
         highlightColor: 'lightgreen',
@@ -21,8 +23,8 @@ const graphConfig = {
 export default class D3Graph extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            config: graphConfig,
+        this.state = {
+            config: this.createConfig(),
             data,
         };
     }
@@ -44,6 +46,28 @@ export default class D3Graph extends Component {
     onMouseOutLink = (source, target) => {
         console.log(`Do something when mouse is out of link between ${source} and ${target}`);
     }
+
+    componentWillReceiveProps = newProps => {
+        const config = this.createConfig(newProps.config);
+        this.setState({ config: config });
+    }
+
+    createConfig = (newConfig = {}) => {
+        const mergedConfig = {
+            ...defaultConfig.graph,
+            ...newConfig.graph,
+            node: {
+                ...defaultConfig.node,
+                ...newConfig.node,
+            },
+            link: {
+                ...defaultConfig.link,
+                ...newConfig.link,
+            },
+        };
+        return mergedConfig;
+    }
+
 
     render() {
 
