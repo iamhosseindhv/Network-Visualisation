@@ -10,6 +10,10 @@ import nodeHelper from './node.helper';
  * const onClickNode = function(nodeId) {
  *      window.alert('Clicked node', nodeId);
  * };
+ * 
+ * const onDoubleClickNode = function(nodeId) {
+ *      window.alert('Double clicked node', nodeId);
+ * };
  *
  * const onMouseOverNode = function(nodeId) {
  *      window.alert('Mouse over node', nodeId);
@@ -38,6 +42,7 @@ import nodeHelper from './node.helper';
  *     type='square'
  *     className='node'
  *     onClickNode={onClickNode}
+ *     onDoubleClickNode={onDoubleClickNode}
  *     onMouseOverNode={onMouseOverNode}
  *     onMouseOutNode={onMouseOutNode} />
  */
@@ -47,6 +52,12 @@ export default class Node extends React.Component {
      * @returns {undefined}
      */
     handleOnClickNode = () => this.props.onClickNode && this.props.onClickNode(this.props.id);
+
+    /**
+     * Handle double click on the node.
+     * @returns {undefined}
+     */
+    handleOnDoubleClickNode = () => this.props.onDoubleClickNode && this.props.onDoubleClickNode(this.props.id);
 
     /**
      * Handle mouse over node event.
@@ -64,6 +75,7 @@ export default class Node extends React.Component {
         const nodeProps = {
             cursor: this.props.cursor,
             onClick: this.handleOnClickNode,
+            onDoubleClick: this.handleOnDoubleClickNode,
             onMouseOut: this.handleOnMouseOutNode,
             onMouseOver: this.handleOnMouseOverNode,
             opacity: this.props.opacity
