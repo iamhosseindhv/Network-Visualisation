@@ -145,8 +145,8 @@ Layout.propTypes = {
      */
     theme: PropTypes.object.isRequired,
     /**
-* @param {object} event The event source of the callback
-    */
+     * @param {object} event The event source of the callback
+     */
     onFormChange: PropTypes.func,
 };
 
