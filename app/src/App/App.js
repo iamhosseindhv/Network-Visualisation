@@ -33,16 +33,12 @@ export default class App extends Component {
 		graphConfig: {},
 	}
 
-	onChangeForm = data => {
-		// console.log(data);
-		this.setState({ graphConfig: data });
-	}
+	onChangeForm = data => { this.setState({ graphConfig: data }) }
 
 	render() {
 		return (
 			<MuiThemeProvider theme={muiTheme}>
 				<Layout onChangeForm={this.onChangeForm}>
-					{/* <D3Graph /> */}
 					<D3Graph config={this.state.graphConfig} />
 				</Layout>
 			</MuiThemeProvider>
