@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import Divider from 'material-ui/Divider';
@@ -138,5 +139,32 @@ class Form extends Component {
         )
     }
 }
+
+Form.propTypes = {
+    /**
+     * The contents of the drawer.
+     */
+    children: PropTypes.node,
+    /**
+     * Useful to extend the style applied to components.
+     */
+    classes: PropTypes.object.isRequired,
+    /**
+     * @ignore
+     */
+    theme: PropTypes.object.isRequired,
+    /**
+     * Boolean value to open/close the drawer on the left
+     */
+    open: PropTypes.bool,
+    /**
+     * @param {object} event The event source of the callback
+     */
+    onToggleOpen: PropTypes.func,
+    /**
+     * @param {object} event The event source of the callback
+     */
+    onChange: PropTypes.func,
+};
 
 export default withStyles(styles, { withTheme: true })(Form);
