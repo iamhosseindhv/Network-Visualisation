@@ -16,6 +16,7 @@
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "hbs": "~4.0.1",
     "http-errors": "~1.6.2",
