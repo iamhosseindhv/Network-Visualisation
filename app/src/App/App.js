@@ -5,9 +5,6 @@ import green from 'material-ui/colors/green';
 import D3Graph from '../D3Graph/D3Graph';
 import Layout from '../Layout/Layout';
 
-import data from '../data';
-
-
 const muiTheme = createMuiTheme({
 	palette: {
 		primary: {
@@ -29,28 +26,12 @@ export default class App extends Component {
 		this.state = {
 			graphData: {},
 			graphConfig: {},
-		}
-
-
-		this.getGraphData()
-			.then(data => this.setState({ graphData: data }))
-			.catch(err => console.log(err));
+		};
 	}
 
-	getGraphData = async () => {
-		// const response = await fetch('/data/graph_name');
-		// const body = await response.json();
-		// if (response.status !== 200) throw Error(body.message);
-		// return body;
-
-		//fake async
-		return data;
-	};
-
-
-	onChangeForm = config => { this.setState({ graphConfig: config }) }
+	onChangeForm = config => { this.setState({ graphConfig: config }) };
 	
-	onChangeData = data => { this.setState({ graphData: data }) }
+	onChangeData = data => { this.setState({ graphData: data }) };
 
 	render() {
 		return (

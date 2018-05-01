@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Divider from 'material-ui/Divider';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
-import Checkbox from 'material-ui/Checkbox';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import Checkbox from 'material-ui/Checkbox';
+import Divider from 'material-ui/Divider';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 
 const defaultSetting = {
     renderLabel: true,
     staticGraph: false,
-}
+};
 
 const constants = {
     GRAPH: 0,
     NODE: 1,
     LINK: 2,
-}
-
+};
 
 class Form extends Component {
     constructor(props) {
@@ -33,11 +32,12 @@ class Form extends Component {
         }
     }
 
-    componentWillMount = () => { this.formDidChange() }
+    componentWillMount = () => { this.formDidChange() };
 
-    formDidChange = () => { this.props.onChange(this.state); }
+    formDidChange = () => { this.props.onChange(this.state) };
 
-    handleChange = (position, name) => event => {
+    handleChange = position => event => {
+        const name = event.target.name;
         switch (position) {
             case constants.GRAPH:
                 var graph = { ...this.state.graph }
@@ -57,7 +57,7 @@ class Form extends Component {
             default:
                 break;
         }
-    };
+    }
 
     /*
     // TODO: modify the function below and replace
@@ -73,6 +73,10 @@ class Form extends Component {
             this.formDidChange()
         });
     }*/
+    /*
+    // or see if you can choose this one
+    handleChange = event => { this.setState({ [event.target.name]: event.target.value }) };
+    */
 
     render() {
         const {
@@ -97,8 +101,10 @@ class Form extends Component {
                                 <Checkbox
                                     defaultChecked={defaultSetting.renderLabel}
                                     checked={this.state.node.renderLabel}
-                                    onChange={this.handleChange(constants.NODE, 'renderLabel')}
+                                    onChange={this.handleChange(constants.NODE)}
                                     value="renderLabel"
+                                    name="renderLabel"
+                                    color="primary"
                                 />
                             }
                             label="Render Labels"
@@ -108,8 +114,10 @@ class Form extends Component {
                                 <Checkbox
                                     defaultChecked={defaultSetting.staticGraph}
                                     checked={this.state.graph.staticGraph}
-                                    onChange={this.handleChange(constants.GRAPH, 'staticGraph')}
+                                    onChange={this.handleChange(constants.GRAPH)}
                                     value="staticGraph"
+                                    name="staticGraph"
+                                    color="primary"
                                 />
                             }
                             label="Static Graph"
@@ -117,7 +125,7 @@ class Form extends Component {
                     </FormGroup>
                 </ListItem>
             </div>
-        )
+        );
     }
 }
 
