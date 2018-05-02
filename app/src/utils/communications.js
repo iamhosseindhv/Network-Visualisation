@@ -3,30 +3,31 @@ import data from '../data';
 
 
 const getAvailableGraphs = async () => {
-    // const response = await fetch('/data/available_graphs');
-    // const body = await response.json();
-    // if (response.status !== 200) throw Error(body.message);
-    // return body;
+    const user_id = 1;
+    const url = '/api/available_graphs/' + user_id;
+    const response = await fetch(url);
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
 
-    //fake async
-    const graphs = [{ id: 1, name: 'My Network' }, { id: 2, name: 'Social Media' }]
+    const graphs = body.graphs;
+    // const graphs = [{ id: 1, name: 'My Network', user_id: 1 }, { id: 2, name: 'Social Media', user_id: 1 }]
     return graphs;
 }
 
 
-const getGraphData = async (graphName) => {
+const getGraphData = async (graphId) => {
     // const response = await fetch('/data/graph_name');
     // const body = await response.json();
     // if (response.status !== 200) throw Error(body.message);
     // return body;
 
     //fake async
-    console.log('Getting data for ' + graphName);
+    console.log('Getting data for ' + graphId);
     return data;
 };
 
 
-export default { 
+export default {
     getAvailableGraphs,
     getGraphData,
 };

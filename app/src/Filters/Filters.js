@@ -26,15 +26,19 @@ class Filters extends Component {
         };
         Utils.getAvailableGraphs()
             .then(data => this.setState({ availableGraphs: data }))
-            .catch(err => console.log(err));
+            .catch(err => console.log(err)); //for now just console.log
     };
 
     handleGraphChange = event => {
         const graphName = event.target.value;
+        var graphId;
+        this.state.availableGraphs.forEach(graph => {
+            if (graph.name === graphName) { graphId = graph.id; }
+        });
         this.setState({ currentGraph: graphName });
-        Utils.getGraphData(graphName)
+        Utils.getGraphData(graphId)
             .then(this.updateData)
-            .catch(err => console.log(err));
+            .catch(err => console.log(err)); //for now just console.log
     };
 
     handleChange = event => { this.setState({ [event.target.name]: event.target.value }) };
