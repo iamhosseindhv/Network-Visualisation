@@ -18,6 +18,10 @@ const constants = {
     LINK: 2,
 };
 
+const styles = theme => ({
+    //...
+});
+
 class Form extends Component {
     constructor(props) {
         super(props)
@@ -148,4 +152,4 @@ Form.propTypes = {
     onChange: PropTypes.func,
 };
 
-export default withStyles({ withTheme: true })(Form);
+export default withStyles(styles, { withTheme: true })(Form);
