@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
@@ -16,7 +16,7 @@ import Filters from '../Filters/Filters';
 import styles from './Layout.styles';
 
 
-class Layout extends React.Component {
+class Layout extends Component {
     state = {
         open: true,
     };
