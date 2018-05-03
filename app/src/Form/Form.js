@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
@@ -90,7 +90,7 @@ class Form extends Component {
         } = this.props;
 
         return (
-            <div>
+            <Fragment>
                 <ListItem>
                     <ListItemIcon>
                         <InboxIcon />
@@ -128,7 +128,7 @@ class Form extends Component {
                         />
                     </FormGroup>
                 </ListItem>
-            </div>
+            </Fragment>
         );
     }
 }

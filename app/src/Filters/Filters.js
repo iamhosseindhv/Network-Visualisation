@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Divider from 'material-ui/Divider';
@@ -53,7 +53,7 @@ class Filters extends Component {
         } = this.props;
 
         return (
-            <div>
+            <Fragment>
                 <Divider />
                 <ListItem >
                     <FormControl className={classes.formControl}>
@@ -69,7 +69,7 @@ class Filters extends Component {
                         </Select>
                     </FormControl>
                 </ListItem >
-            </div>
+            </Fragment>
         );
     }
 }
