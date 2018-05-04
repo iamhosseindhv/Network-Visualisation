@@ -1,6 +1,6 @@
 {
-  "name": "react-express-boilerplate",
-  "description": "Boilerplate for an react+express app, tailored to my needs",
+  "name": "Network-Visualisation",
+  "description": "Graph visualisation using d3",
   "version": "1.0.0",
   "author": {
     "name": "Hossein Dehnokhalaji",
@@ -30,7 +30,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/iamhosseindhv/React-Express-boilerplate.git"
+    "url": "https://github.com/iamhosseindhv/Network-Visualisation.git"
   },
   "keywords": [
     "node",
@@ -39,6 +39,13 @@
     "express",
     "create-react-app",
     "boilerplate",
-    "react"
+    "react",
+    "d3",
+    "network visualisation",
+    "visualisation",
+    "visualization",
+    "graph",
+    "javascript",
+    "d3.js",
   ]
 }
