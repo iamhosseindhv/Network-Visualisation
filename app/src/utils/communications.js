@@ -23,7 +23,7 @@ const getGraphData = async (graphId) => {
     // return body;
 
     //fake async
-    console.log('Getting data for ' + graphId);
+    // console.log('Getting data for ' + graphId);
     return data;
 };
 
