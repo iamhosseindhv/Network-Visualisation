@@ -11,6 +11,7 @@ const defaultConfig = {
     node: {
         color: '#d3d3d3',
         highlightColor: 'lightgreen',
+        labelProperty: 'name',
         size: 200,
     },
     link: {
