@@ -34,7 +34,7 @@ router.get('/graph_data/:graph_id', (req, res) => {
         })
         .then(results => { links = results; } )
         .then(() => res.json({ links: links, nodes: nodes }) )
-        .catch(err => console.log(err));  //for now we just print out
+        .catch(handleError);
 });
 
 
