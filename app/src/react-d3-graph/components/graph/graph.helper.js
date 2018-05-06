@@ -369,6 +369,22 @@ function initializeGraphState({ data, id, config }, state) {
     const formatedId = id.replace(/ /g, '_');
     const simulation = _createForceSimulation(newConfig.width, newConfig.height);
 
+    console.log({
+        id: formatedId,
+        config: newConfig,
+        links,
+        d3Links,
+        linksInputSnapshot,
+        nodes,
+        d3Nodes,
+        nodesInputSnapshot,
+        highlightedNode: '',
+        simulation,
+        newGraphElements: false,
+        configUpdated: false,
+        transform: 1
+    });
+
     return {
         id: formatedId,
         config: newConfig,
