@@ -309,6 +309,7 @@ function buildNodeProps(node, config, nodeCallbacks = {}, highlightedNode, highl
         dx,
         fontWeight: highlight ? config.node.highlightFontWeight : config.node.fontWeight,
         id: node.id,
+        metadata: node,
         label: node[config.node.labelProperty] || node.id,
         onClickNode: nodeCallbacks.onClickNode,
         onDoubleClickNode: nodeCallbacks.onDoubleClickNode,
@@ -368,22 +369,6 @@ function initializeGraphState({ data, id, config }, state) {
     const { nodes: d3Nodes, links: d3Links } = graph;
     const formatedId = id.replace(/ /g, '_');
     const simulation = _createForceSimulation(newConfig.width, newConfig.height);
-
-    console.log({
-        id: formatedId,
-        config: newConfig,
-        links,
-        d3Links,
-        linksInputSnapshot,
-        nodes,
-        d3Nodes,
-        nodesInputSnapshot,
-        highlightedNode: '',
-        simulation,
-        newGraphElements: false,
-        configUpdated: false,
-        transform: 1
-    });
 
     return {
         id: formatedId,
