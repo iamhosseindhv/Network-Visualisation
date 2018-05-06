@@ -10,7 +10,7 @@ router.get('/hello', (req, res) => {
             express: 'Hello From Expressss',
             result: results[0],
         }))
-        .catch(err => console.log(err)); //for now we just print out
+        .catch(handleError);
 });
 
 
@@ -19,7 +19,7 @@ router.get('/available_graphs/:user_id', (req, res) => {
     var db = require('../database');
     db.query('SELECT * FROM graphs WHERE user_id = ?', [user_id])
         .then(results => res.json({ graphs: results }))
-        .catch(err => console.log(err)); //for now we just print out
+        .catch(handleError);
 });
 
 
@@ -36,6 +36,13 @@ router.get('/graph_data/:graph_id', (req, res) => {
         .then(() => res.json({ links: links, nodes: nodes }) )
         .catch(err => console.log(err));  //for now we just print out
 });
+
+
+const handleError = (err) => {
+    // here you may send a non 200-status response and some description
+    // but for now just console.log
+    console.log(err);
+};
 
 
 module.exports = router;

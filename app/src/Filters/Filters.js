@@ -26,7 +26,7 @@ class Filters extends Component {
         };
         Utils.getAvailableGraphs()
             .then(data => this.setState({ availableGraphs: data }))
-            .catch(err => console.log(err)); //for now just console.log
+            .catch(this.handleError);
     };
 
     handleGraphChange = event => {
@@ -38,7 +38,13 @@ class Filters extends Component {
         this.setState({ currentGraph: graphName });
         Utils.getGraphData(graphId)
             .then(this.updateData)
-            .catch(err => console.log(err)); //for now just console.log
+            .catch(this.handleError);
+    };
+
+    handleError = (err) => {
+        // here you may present a snackBar to tell the user something has gone wrong,
+        // but for now just console.log
+        console.log(err);
     };
 
     handleChange = event => { this.setState({ [event.target.name]: event.target.value }) };
