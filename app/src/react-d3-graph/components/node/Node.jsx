@@ -25,6 +25,7 @@ import nodeHelper from './node.helper';
  *
  * <Node
  *     id='nodeId'
+ *     metadata={id: , name: , and all other data about a node}
  *     cx=22
  *     cy=22
  *     fill='green'
@@ -51,25 +52,25 @@ export default class Node extends React.Component {
      * Handle click on the node.
      * @returns {undefined}
      */
-    handleOnClickNode = () => this.props.onClickNode && this.props.onClickNode(this.props.id);
+    handleOnClickNode = () => this.props.onClickNode && this.props.onClickNode(this.props.metadata);
 
     /**
      * Handle double click on the node.
      * @returns {undefined}
      */
-    handleOnDoubleClickNode = () => this.props.onDoubleClickNode && this.props.onDoubleClickNode(this.props.id);
+    handleOnDoubleClickNode = () => this.props.onDoubleClickNode && this.props.onDoubleClickNode(this.props.metadata);
 
     /**
      * Handle mouse over node event.
      * @returns {undefined}
      */
-    handleOnMouseOverNode = () => this.props.onMouseOverNode && this.props.onMouseOverNode(this.props.id);
+    handleOnMouseOverNode = () => this.props.onMouseOverNode && this.props.onMouseOverNode(this.props.metadata);
 
     /**
      * Handle mouse out node event.
      * @returns {undefined}
      */
-    handleOnMouseOutNode = () => this.props.onMouseOut && this.props.onMouseOut(this.props.id);
+    handleOnMouseOutNode = () => this.props.onMouseOut && this.props.onMouseOut(this.props.metadata);
 
     render() {
         const nodeProps = {
