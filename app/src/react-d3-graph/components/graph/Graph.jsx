@@ -209,20 +209,20 @@ export default class Graph extends React.Component {
 
     /**
      * Handles click on a node event.
-     * @param  {string} id - id of the node that participates in the event.
+     * @param  {string} node - the node that participates in the event.
      * @returns {undefined}
      */
-    onClickNode = id => {
-        this.props.onClickNode && this.props.onClickNode(id);
+    onClickNode = node => {
+        this.props.onClickNode && this.props.onClickNode(node);
     };
 
     /**
      * Handles double click on a node event.
-     * @param  {string} id - id of the node that participates in the event.
+     * @param  {string} node - the node that participates in the event.
      * @returns {undefined}
      */
-    onDoubleClickNode = id => {
-        this.props.onDoubleClickNode && this.props.onDoubleClickNode(id);
+    onDoubleClickNode = node => {
+        this.props.onDoubleClickNode && this.props.onDoubleClickNode(node);
 
         const doHighlight = !this.state.isFocused;
         const highlightedNode = this.state.highlightedNode;
@@ -230,28 +230,28 @@ export default class Graph extends React.Component {
             this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(highlightedNode, doHighlight);
             this.setState({ highlightedNode: '' });
         } else {
-            this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, doHighlight);
+            this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(node.id, doHighlight);
         }
         this.setState({ isFocused: doHighlight });
     };
 
     /**
      * Handles mouse over node event.
-     * @param  {string} id - id of the node that participates in the event.
+     * @param  {string} node - the node that participates in the event.
      * @returns {undefined}
      */
-    onMouseOverNode = id => {
-        this.props.onMouseOverNode && this.props.onMouseOverNode(id);
+    onMouseOverNode = node => {
+        this.props.onMouseOverNode && this.props.onMouseOverNode(node);
         // this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, true);
     };
 
     /**
      * Handles mouse out node event.
-     * @param  {string} id - id of the node that participates in the event.
+     * @param  {string} node - the node that participates in the event.
      * @returns {undefined}
      */
-    onMouseOutNode = id => {
-        this.props.onMouseOutNode && this.props.onMouseOutNode(id);
+    onMouseOutNode = node => {
+        this.props.onMouseOutNode && this.props.onMouseOutNode(node);
         // this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(id, false);
     };
 
