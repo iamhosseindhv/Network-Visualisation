@@ -222,17 +222,17 @@ export default class Graph extends React.Component {
      * @returns {undefined}
      */
     onDoubleClickNode = node => {
-        this.props.onDoubleClickNode && this.props.onDoubleClickNode(node);
-
         const doHighlight = !this.state.isFocused;
         const highlightedNode = this.state.highlightedNode;
-        if (highlightedNode !== ''){
+        if (highlightedNode !== '') {
             this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(highlightedNode, doHighlight);
             this.setState({ highlightedNode: '' });
         } else {
             this.state.config.nodeHighlightBehavior && this._setNodeHighlightedValue(node.id, doHighlight);
         }
-        this.setState({ isFocused: doHighlight });
+        this.setState({ isFocused: doHighlight }, () => {
+            this.props.onDoubleClickNode && this.props.onDoubleClickNode(node);
+        });
     };
 
     /**
