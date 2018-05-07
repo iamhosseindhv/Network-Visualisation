@@ -1,14 +1,47 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import classNames from 'classnames';
+import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import { MenuItem } from 'material-ui/Menu';
+import IconButton from 'material-ui/IconButton';
+import ClearIcon from '@material-ui/icons/Clear';
+import InfoIcon from '@material-ui/icons/Info';
+import Drawer from 'material-ui/Drawer';
 import { Graph } from '../react-d3-graph';
 import { createConfig } from './D3Graph.config';
 
+let drawerWidth = 260;
+const styles = theme => ({
+    list: {
+        width: drawerWidth,
+    },
+    toolbar: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        padding: '0 8px',
+        ...theme.mixins.toolbar,
+    },
+    drawerPaper: {
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        width: drawerWidth,
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+});
 
-export default class D3Graph extends Component {
+class D3Graph extends Component {
     constructor(props) {
         super(props);
         this.state = {
             config: createConfig(),
             data: {},
+            drawerOpen: false,
+            highlightedNode: {},
             renderGraph: false,
         };
     }
@@ -25,25 +58,31 @@ export default class D3Graph extends Component {
         }
     }
 
-    onClickNode = id => console.log(`Clicked node ${id}`);
+    onClickNode = node => { /*console.log(`Clicked node ${node}`);*/ }
 
-    onDoubleClickNode = id => console.log(`Double clicked node ${id}`);
+    onDoubleClickNode = node => {
+        //present drawer from right and render node's data
+        this.setState({ highlightedNode: node }, () => this.handleDrawerToggle());
+    }
 
-    onClickLink = (source, target) => console.log(`Clicked link between ${source} and ${target}`);
+    onMouseOverNode = node => { /*console.log(`Do something when mouse is over node (${node})`);*/ }
 
-    onMouseOverNode = id => console.log(`Do something when mouse is over node (${id})`);
+    onMouseOutNode = node => { /*console.log(`Do something when mouse is out of node (${node})`);*/ }
 
-    onMouseOutNode = id => console.log(`Do something when mouse is out of node (${id})`);
+    onClickLink = (source, target) => { /*console.log(`Clicked link between ${source} and ${target}`);*/ }
 
     onMouseOverLink = (source, target) => {
-        console.log(`Do something when mouse is over link between ${source} and ${target}`);
+        /*console.log(`Do something when mouse is over link between ${source} and ${target}`);*/
     }
 
     onMouseOutLink = (source, target) => {
-        console.log(`Do something when mouse is out of link between ${source} and ${target}`);
+        /*console.log(`Do something when mouse is out of link between ${source} and ${target}`);*/
     }
 
+    handleDrawerToggle = () => { this.setState({ drawerOpen: !this.state.drawerOpen }) };
+
     render() {
+        const { classes } = this.props;
 
         if (this.state.renderGraph) {
             const data = {
@@ -63,7 +102,34 @@ export default class D3Graph extends Component {
                 onMouseOutLink: this.onMouseOutLink
             };
             return (
-                <Graph ref="graph" {...graphProps} />
+                <Fragment>
+                    <Drawer 
+                        anchor='right' 
+                        open={this.state.drawerOpen} 
+                        onClose={this.handleDrawerToggle}>
+                        <div className={classes.toolbar}>
+                            <IconButton onClick={this.handleDrawerToggle}>
+                                <ClearIcon />
+                            </IconButton>
+                        </div>
+                        <ListItem>
+                            <ListItemIcon>
+                                <InfoIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Details" />
+                        </ListItem>
+                        <ListItem>
+                            {/* {Object.entries(this.state.highlightedNode).map(data => {
+                                // return <MenuItem key={key} value={value}>`${key}: ${value}`</MenuItem> 
+                                // console.log(`${key}: ${value}`)
+                                return <p>{data}</p>;
+                            })} */}
+                            {this.state.highlightedNode.id}
+                        </ListItem>
+                    </Drawer>
+
+                    <Graph ref="graph" {...graphProps} />
+                </Fragment>
             );
 
         } else {
@@ -76,3 +142,16 @@ export default class D3Graph extends Component {
 
     }
 }
+
+D3Graph.propTypes = {
+    /**
+     * Useful to extend the style applied to components.
+     */
+    classes: PropTypes.object.isRequired,
+    /**
+     * @ignore
+     */
+    theme: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles, { withTheme: true })(D3Graph);
