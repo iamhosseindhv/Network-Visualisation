@@ -63,7 +63,10 @@ class D3Graph extends Component {
 
     onDoubleClickNode = node => {
         const presentDrawer = this.state.presentDrawer;
-        if (presentDrawer) { this.handleDrawerToggle() }
+        if (presentDrawer) {
+            this.handleRenderingDrawerData(node);
+            this.handleDrawerToggle();
+        }
         this.setState({
             highlightedNode: node,
             presentDrawer: !presentDrawer,
@@ -85,6 +88,15 @@ class D3Graph extends Component {
     }
 
     handleDrawerToggle = () => { this.setState({ drawerOpen: !this.state.drawerOpen }) };
+
+    handleRenderingDrawerData = (node) => {
+        const drawerRows = [];
+        Object.entries(node).forEach(([key, value]) => {
+            const item = <MenuItem key={key} value={value}>{key}: {value}</MenuItem>;
+            drawerRows.push(item);
+        });
+        this.setState({ drawerRows: drawerRows });
+    }
 
     render() {
         const { classes } = this.props;
@@ -110,6 +122,7 @@ class D3Graph extends Component {
                 <Fragment>
                     <Drawer
                         anchor='right'
+                        width='100'
                         open={this.state.drawerOpen}
                         onClose={this.handleDrawerToggle}>
                         <div className={classes.toolbar}>
@@ -123,14 +136,7 @@ class D3Graph extends Component {
                             </ListItemIcon>
                             <ListItemText primary="Details" />
                         </ListItem>
-                        <ListItem>
-                            {/* {Object.entries(this.state.highlightedNode).map(data => {
-                                // return <MenuItem key={key} value={value}>`${key}: ${value}`</MenuItem> 
-                                // console.log(`${key}: ${value}`)
-                                return <p>{data}</p>;
-                            })} */}
-                            {this.state.highlightedNode.id}
-                        </ListItem>
+                        {this.state.drawerRows}
                     </Drawer>
 
                     <Graph ref="graph" {...graphProps} />
