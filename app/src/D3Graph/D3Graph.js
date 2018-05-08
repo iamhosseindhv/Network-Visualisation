@@ -43,6 +43,7 @@ class D3Graph extends Component {
             drawerOpen: false,
             highlightedNode: {},
             renderGraph: false,
+            presentDrawer: true,
         };
     }
 
@@ -61,8 +62,12 @@ class D3Graph extends Component {
     onClickNode = node => { /*console.log(`Clicked node ${node}`);*/ }
 
     onDoubleClickNode = node => {
-        //present drawer from right and render node's data
-        this.setState({ highlightedNode: node }, () => this.handleDrawerToggle());
+        const presentDrawer = this.state.presentDrawer;
+        if (presentDrawer) { this.handleDrawerToggle() }
+        this.setState({
+            highlightedNode: node,
+            presentDrawer: !presentDrawer,
+        });
     }
 
     onMouseOverNode = node => { /*console.log(`Do something when mouse is over node (${node})`);*/ }
@@ -103,9 +108,9 @@ class D3Graph extends Component {
             };
             return (
                 <Fragment>
-                    <Drawer 
-                        anchor='right' 
-                        open={this.state.drawerOpen} 
+                    <Drawer
+                        anchor='right'
+                        open={this.state.drawerOpen}
                         onClose={this.handleDrawerToggle}>
                         <div className={classes.toolbar}>
                             <IconButton onClick={this.handleDrawerToggle}>
