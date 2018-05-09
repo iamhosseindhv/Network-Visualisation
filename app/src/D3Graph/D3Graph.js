@@ -90,12 +90,11 @@ class D3Graph extends Component {
     handleDrawerToggle = () => { this.setState({ drawerOpen: !this.state.drawerOpen }) };
 
     handleRenderingDrawerData = (node) => {
-        const drawerRows = [];
-        Object.entries(node).forEach(([key, value]) => {
-            const item = <MenuItem key={key} value={value}>{key}: {value}</MenuItem>;
-            drawerRows.push(item);
+        const drawerRows = Object.entries(node).map((item, index) => {
+            const key = item[0], value = item[1]; 
+            return <MenuItem key={index} value={value}>{key}: {value}</MenuItem>
         });
-        this.setState({ drawerRows: drawerRows });
+        this.setState({ drawerRows });
     }
 
     render() {
