@@ -30,13 +30,10 @@ class Filters extends Component {
     };
 
     handleGraphChange = event => {
-        const graphName = event.target.value;
-        var graphId;
-        this.state.availableGraphs.forEach(graph => {
-            if (graph.name === graphName) { graphId = graph.id; }
-        });
-        this.setState({ currentGraph: graphName });
-        Utils.getGraphData(graphId)
+        const currentGraph = event.target.value;
+        const selectedGraph = this.state.availableGraphs.find(graph => graph.name === currentGraph);
+        this.setState({ currentGraph });
+        Utils.getGraphData(selectedGraph.id)
             .then(this.updateData)
             .catch(this.handleError);
     };
