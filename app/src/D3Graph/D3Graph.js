@@ -42,7 +42,7 @@ class D3Graph extends Component {
             data: {},
             drawerOpen: false,
             highlightedNode: {},
-            renderGraph: false,
+            shouldRenderGraph: false,
             presentDrawer: true,
         };
     }
@@ -54,7 +54,7 @@ class D3Graph extends Component {
         if (Object.keys(newProps.data).length !== 0) {
             this.setState({
                 data: newProps.data,
-                renderGraph: true,
+                shouldRenderGraph: true,
             });
         }
     }
@@ -100,7 +100,7 @@ class D3Graph extends Component {
     render() {
         const { classes } = this.props;
 
-        if (this.state.renderGraph) {
+        if (this.state.shouldRenderGraph) {
             const data = {
                 nodes: this.state.data.nodes,
                 links: this.state.data.links
