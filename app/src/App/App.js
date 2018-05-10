@@ -1,30 +1,14 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import purple from 'material-ui/colors/purple';
-import green from 'material-ui/colors/green';
+import { MuiThemeProvider } from 'material-ui/styles';
 import D3Graph from '../D3Graph/D3Graph';
 import CollapsibleDrawer from '../CollapsibleDrawer/CollapsibleDrawer';
-import styles from './App.styles';
+import { muiTheme, styles } from './App.styles';
 
-const muiTheme = createMuiTheme({
-    palette: {
-        primary: {
-            light: purple[300],
-            main: purple[500],
-            dark: purple[700],
-        },
-        secondary: {
-            light: green[300],
-            main: green[500],
-            dark: green[700],
-        },
-    },
-});
 
 class App extends Component {
-    constructor(properties) {
-        super(properties)
+    constructor(props) {
+        super(props)
         this.state = {
             graphData: {},
             graphConfig: {},
