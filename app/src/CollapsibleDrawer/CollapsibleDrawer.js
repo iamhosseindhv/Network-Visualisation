@@ -75,7 +75,7 @@ CollapsibleDrawer.propTypes = {
     /**
      * @param {object} event The event source of the callback
      */
-    onFormChange: PropTypes.func.isRequired,
+    onChangeForm: PropTypes.func.isRequired,
     /**
      * @param {object} event The event source of the callback
      */
