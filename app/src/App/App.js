@@ -4,7 +4,7 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import purple from 'material-ui/colors/purple';
 import green from 'material-ui/colors/green';
 import D3Graph from '../D3Graph/D3Graph';
-import Layout from '../Layout/Layout';
+import SideMiniDrawer from '../SideMiniDrawer/SideMiniDrawer';
 import styles from './App.styles';
 
 const muiTheme = createMuiTheme({
@@ -40,7 +40,7 @@ class App extends Component {
         return (
             <MuiThemeProvider theme={muiTheme}>
                 <div className={classes.root}>
-                    <Layout onChangeForm={this.onChangeForm} onChangeData={this.onChangeData} />
+                    <SideMiniDrawer onChangeForm={this.onChangeForm} onChangeData={this.onChangeData} />
                     <D3Graph data={this.state.graphData} config={this.state.graphConfig} />
                 </div>
             </MuiThemeProvider>
