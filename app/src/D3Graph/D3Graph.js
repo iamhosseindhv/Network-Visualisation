@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
@@ -10,29 +10,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import Drawer from 'material-ui/Drawer';
 import { Graph } from '../react-d3-graph';
 import { createConfig } from './D3Graph.config';
-
-let drawerWidth = 260;
-const styles = theme => ({
-    list: {
-        width: drawerWidth,
-    },
-    toolbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        padding: '0 8px',
-        ...theme.mixins.toolbar,
-    },
-    drawerPaper: {
-        position: 'relative',
-        whiteSpace: 'nowrap',
-        width: drawerWidth,
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
-});
+import styles from './D3Graph.styles';
 
 class D3Graph extends Component {
     constructor(props) {
@@ -91,7 +69,7 @@ class D3Graph extends Component {
 
     handleRenderingDrawerData = (node) => {
         const drawerRows = Object.entries(node).map((item, index) => {
-            const key = item[0], value = item[1]; 
+            const key = item[0], value = item[1];
             return <MenuItem key={index} value={value}>{key}: {value}</MenuItem>
         });
         this.setState({ drawerRows });
@@ -118,7 +96,7 @@ class D3Graph extends Component {
                 onMouseOutLink: this.onMouseOutLink
             };
             return (
-                <Fragment>
+                <main className={classes.content}>
                     <Drawer
                         anchor='right'
                         width='100'
@@ -139,7 +117,7 @@ class D3Graph extends Component {
                     </Drawer>
 
                     <Graph ref="graph" {...graphProps} />
-                </Fragment>
+                </main>
             );
 
         } else {
@@ -162,6 +140,14 @@ D3Graph.propTypes = {
      * @ignore
      */
     theme: PropTypes.object.isRequired,
+    /**
+     * The data to be shown as a graph
+     */
+    data: PropTypes.object.isRequired,
+    /**
+     * Configurations of the graph
+     */
+    config: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(D3Graph);
