@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui';
 import { MuiThemeProvider } from 'material-ui/styles';
 import D3Graph from '../D3Graph/D3Graph';
 import CollapsibleDrawer from '../CollapsibleDrawer/CollapsibleDrawer';
-import { muiTheme, styles } from './App.styles';
+import { RootWrapper, muiTheme } from './App.styles';
 
 
 class App extends Component {
@@ -23,14 +22,14 @@ class App extends Component {
         const { classes } = this.props;
         return (
             <MuiThemeProvider theme={muiTheme}>
-                <div className={classes.root}>
+                <RootWrapper>
                     <CollapsibleDrawer onChangeForm={this.onChangeForm} onChangeData={this.onChangeData} />
                     <D3Graph data={this.state.graphData} config={this.state.graphConfig} />
-                </div>
+                </RootWrapper>
             </MuiThemeProvider>
         );
     }
 
 }
 
-export default withStyles(styles)(App);
+export default App;

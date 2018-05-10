@@ -1,6 +1,16 @@
+import styled from 'styled-components';
 import { createMuiTheme } from 'material-ui/styles';
 import purple from 'material-ui/colors/purple';
 import green from 'material-ui/colors/green';
+
+const RootWrapper = styled.div`
+    flex-grow: 1;
+    height: 100vh;
+    z-index: 1;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+`;
 
 const muiTheme = createMuiTheme({
     palette: {
@@ -17,18 +27,7 @@ const muiTheme = createMuiTheme({
     },
 });
 
-const styles = {
-    root: {
-        flexGrow: 1,
-        height: '100vh',
-        zIndex: 1,
-        overflow: 'hidden',
-        position: 'relative',
-        display: 'flex',
-    },
-};
-
 export {
+    RootWrapper,
     muiTheme,
-    styles,
 };
