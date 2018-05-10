@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { withStyles } from 'material-ui';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import purple from 'material-ui/colors/purple';
 import green from 'material-ui/colors/green';
 import D3Graph from '../D3Graph/D3Graph';
 import Layout from '../Layout/Layout';
+import styles from './App.styles';
 
 const muiTheme = createMuiTheme({
     palette: {
@@ -20,7 +22,7 @@ const muiTheme = createMuiTheme({
     },
 });
 
-export default class App extends Component {
+class App extends Component {
     constructor(properties) {
         super(properties)
         this.state = {
@@ -34,13 +36,17 @@ export default class App extends Component {
     onChangeData = data => { this.setState({ graphData: data }) };
 
     render() {
+        const { classes } = this.props;
         return (
             <MuiThemeProvider theme={muiTheme}>
-                <Layout onChangeForm={this.onChangeForm} onChangeData={this.onChangeData}>
+                <div className={classes.root}>
+                    <Layout onChangeForm={this.onChangeForm} onChangeData={this.onChangeData} />
                     <D3Graph data={this.state.graphData} config={this.state.graphConfig} />
-                </Layout>
+                </div>
             </MuiThemeProvider>
         );
     }
 
 }
+
+export default withStyles(styles)(App);
