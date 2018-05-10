@@ -14,10 +14,10 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Form from '../Form/Form';
 import Filters from '../Filters/Filters';
-import styles from './SideMiniDrawer.styles';
+import styles from './CollapsibleDrawer.styles';
 
 
-class SideMiniDrawer extends Component {
+class CollapsibleDrawer extends Component {
     state = {
         open: true,
     };
@@ -64,7 +64,7 @@ class SideMiniDrawer extends Component {
     }
 }
 
-SideMiniDrawer.propTypes = {
+CollapsibleDrawer.propTypes = {
     /**
      * Useful to extend the style applied to components.
      */
@@ -84,4 +84,4 @@ SideMiniDrawer.propTypes = {
 };
 
 
-export default withStyles(styles, { withTheme: true })(SideMiniDrawer);
+export default withStyles(styles, { withTheme: true })(CollapsibleDrawer);
