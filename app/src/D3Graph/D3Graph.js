@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import classNames from 'classnames';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import { MenuItem } from 'material-ui/Menu';
 import IconButton from 'material-ui/IconButton';
@@ -19,7 +18,6 @@ class D3Graph extends Component {
             config: createConfig(),
             data: {},
             drawerOpen: false,
-            highlightedNode: {},
             shouldRenderGraph: false,
             presentDrawer: true,
         };
@@ -45,25 +43,12 @@ class D3Graph extends Component {
             this.handleRenderingDrawerData(node);
             this.handleDrawerToggle();
         }
-        this.setState({
-            highlightedNode: node,
-            presentDrawer: !presentDrawer,
-        });
+        this.setState({ presentDrawer: !presentDrawer });
     }
 
-    onMouseOverNode = node => { /*console.log(`Do something when mouse is over node (${node})`);*/ }
+    onMouseOverNode = node => { /*console.log(`Mouse is over node (${node})`);*/ }
 
-    onMouseOutNode = node => { /*console.log(`Do something when mouse is out of node (${node})`);*/ }
-
-    onClickLink = (source, target) => { /*console.log(`Clicked link between ${source} and ${target}`);*/ }
-
-    onMouseOverLink = (source, target) => {
-        /*console.log(`Do something when mouse is over link between ${source} and ${target}`);*/
-    }
-
-    onMouseOutLink = (source, target) => {
-        /*console.log(`Do something when mouse is out of link between ${source} and ${target}`);*/
-    }
+    onMouseOutNode = node => { /*console.log(`Mouse is out of node (${node})`);*/ }
 
     handleDrawerToggle = () => { this.setState({ drawerOpen: !this.state.drawerOpen }) };
 
@@ -77,58 +62,49 @@ class D3Graph extends Component {
 
     render() {
         const { classes } = this.props;
-
-        if (this.state.shouldRenderGraph) {
-            const data = {
-                nodes: this.state.data.nodes,
-                links: this.state.data.links
-            };
-            const graphProps = {
-                id: 'graph',
-                data,
-                config: this.state.config,
-                onClickNode: this.onClickNode,
-                onDoubleClickNode: this.onDoubleClickNode,
-                onClickLink: this.onClickLink,
-                onMouseOverNode: this.onMouseOverNode,
-                onMouseOutNode: this.onMouseOutNode,
-                onMouseOverLink: this.onMouseOverLink,
-                onMouseOutLink: this.onMouseOutLink
-            };
-            return (
-                <main className={classes.content}>
-                    <Drawer
-                        anchor='right'
-                        width='100'
-                        open={this.state.drawerOpen}
-                        onClose={this.handleDrawerToggle}>
-                        <div className={classes.toolbar}>
-                            <IconButton onClick={this.handleDrawerToggle}>
-                                <ClearIcon />
-                            </IconButton>
-                        </div>
-                        <ListItem>
-                            <ListItemIcon>
-                                <InfoIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Details" />
-                        </ListItem>
-                        {this.state.drawerRows}
-                    </Drawer>
-
-                    <Graph ref="graph" {...graphProps} />
-                </main>
-            );
-
-        } else {
-            //render a page which shows loading and saying that data is on it's way
-            return (
-                <h2>waiting for data...</h2>
-            );
+        if (!this.state.shouldRenderGraph) {
+            return <h2>waiting for data...</h2>;
         }
 
+        const data = {
+            nodes: this.state.data.nodes,
+            links: this.state.data.links
+        };
+        const graphProps = {
+            id: 'graph',
+            data,
+            config: this.state.config,
+            onClickNode: this.onClickNode,
+            onDoubleClickNode: this.onDoubleClickNode,
+            onMouseOverNode: this.onMouseOverNode,
+            onMouseOutNode: this.onMouseOutNode,
+        };
+        return (
+            <main className={classes.content}>
+                <Drawer
+                    anchor='right'
+                    width='100'
+                    open={this.state.drawerOpen}
+                    onClose={this.handleDrawerToggle}>
+                    <div className={classes.toolbar}>
+                        <IconButton onClick={this.handleDrawerToggle}>
+                            <ClearIcon />
+                        </IconButton>
+                    </div>
+                    <ListItem>
+                        <ListItemIcon>
+                            <InfoIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Details" />
+                    </ListItem>
+                    {this.state.drawerRows}
+                </Drawer>
 
+                <Graph ref="graph" {...graphProps} />
+            </main>
+        );
     }
+    
 }
 
 D3Graph.propTypes = {
