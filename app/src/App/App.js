@@ -19,7 +19,6 @@ class App extends Component {
     onChangeData = data => { this.setState({ graphData: data }) };
 
     render() {
-        const { classes } = this.props;
         return (
             <MuiThemeProvider theme={muiTheme}>
                 <RootWrapper>
