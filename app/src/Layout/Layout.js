@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import Drawer from 'material-ui/Drawer';
+/* Uncomment if you needed app bar at the top */
 /*import Typography from 'material-ui/Typography';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -25,7 +26,6 @@ class Layout extends Component {
 
     render() {
         const {
-            children,
             classes,
             theme,
             onChangeForm,
@@ -33,51 +33,38 @@ class Layout extends Component {
         } = this.props;
 
         return (
-            <div className={classes.root}>
-                {/* <AppBar position="absolute" className={classNames(classes.appBar, this.state.open && classes.appBarShift)} >
-                    <Toolbar disableGutters={!this.state.open}>
-                        <IconButton color="inherit" aria-label="open drawer" onClick={this.handleDrawerToggle}
-                            className={classNames(classes.menuButton, this.state.open && classes.hide)}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="title" color="inherit" noWrap> Mini variant drawer </Typography>
-                    </Toolbar>
-                </AppBar> */}
+            /* Uncomment if you needed app bar at the top */
+            /* <AppBar position="absolute" className={classNames(classes.appBar, this.state.open && classes.appBarShift)} >
+                <Toolbar disableGutters={!this.state.open}>
+                    <IconButton color="inherit" aria-label="open drawer" onClick={this.handleDrawerToggle}
+                        className={classNames(classes.menuButton, this.state.open && classes.hide)}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="title" color="inherit" noWrap> Mini variant drawer </Typography>
+                </Toolbar>
+            </AppBar> */
 
-                <Drawer
-                    variant="permanent"
-                    classes={{ paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose), }}
-                    open={this.state.open}
-                >
-                    <div className={classes.toolbar}>
-                        <IconButton onClick={this.handleDrawerToggle}>
-                            {this.state.open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                        </IconButton>
-                    </div>
-
-                    {/* Configurations */}
-                    <Form onChange={onChangeForm} />
-                    {/* Search and filters */}
-                    <Filters onChangeData={onChangeData} />
-
-                </Drawer>
-
-                <main className={classes.content}>
-                    {/* uncomment line below if you also uncommented the Appbar/Toolbar component */}
-                    {/* <div className={classes.toolbar} /> */}
-                    {children}
-                </main>
-            </div>
+            <Drawer
+                variant="permanent"
+                classes={{ paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose), }}
+                open={this.state.open}
+            >
+                <div className={classes.toolbar}>
+                    <IconButton onClick={this.handleDrawerToggle}>
+                        {this.state.open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                    </IconButton>
+                </div>
+                {/* Configurations */}
+                <Form onChange={onChangeForm} />
+                {/* Search and filters */}
+                <Filters onChangeData={onChangeData} />
+            </Drawer>
         );
     }
 }
 
 Layout.propTypes = {
-    /**
-     * The contents of the drawer.
-     */
-    children: PropTypes.node,
     /**
      * Useful to extend the style applied to components.
      */
@@ -89,11 +76,11 @@ Layout.propTypes = {
     /**
      * @param {object} event The event source of the callback
      */
-    onFormChange: PropTypes.func,
+    onFormChange: PropTypes.func.isRequired,
     /**
      * @param {object} event The event source of the callback
      */
-    onChangeData: PropTypes.func,
+    onChangeData: PropTypes.func.isRequired,
 };
 
 
