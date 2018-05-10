@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import { MenuItem } from 'material-ui/Menu';
-import IconButton from 'material-ui/IconButton';
-import ClearIcon from '@material-ui/icons/Clear';
-import InfoIcon from '@material-ui/icons/Info';
-import Drawer from 'material-ui/Drawer';
 import { Graph } from '../react-d3-graph';
 import { createConfig } from './D3Graph.config';
+import NodeView from '../NodeView/NodeView';
 import styles from './D3Graph.styles';
 
 class D3Graph extends Component {
@@ -20,10 +15,12 @@ class D3Graph extends Component {
             drawerOpen: false,
             shouldRenderGraph: false,
             presentDrawer: true,
+            highlightedNode: [],
         };
     }
 
     componentWillReceiveProps = newProps => {
+        //TODO: first check for difference
         const config = createConfig(newProps.config);
         this.setState({ config: config });
         //if there is data
@@ -40,8 +37,10 @@ class D3Graph extends Component {
     onDoubleClickNode = node => {
         const presentDrawer = this.state.presentDrawer;
         if (presentDrawer) {
-            this.handleRenderingDrawerData(node);
-            this.handleDrawerToggle();
+            this.setState({
+                highlightedNode: node,
+                drawerOpen: !this.state.drawerOpen,
+            });
         }
         this.setState({ presentDrawer: !presentDrawer });
     }
@@ -50,15 +49,7 @@ class D3Graph extends Component {
 
     onMouseOutNode = node => { /*console.log(`Mouse is out of node (${node})`);*/ }
 
-    handleDrawerToggle = () => { this.setState({ drawerOpen: !this.state.drawerOpen }) };
-
-    handleRenderingDrawerData = (node) => {
-        const drawerRows = Object.entries(node).map((item, index) => {
-            const key = item[0], value = item[1];
-            return <MenuItem key={index} value={value}>{key}: {value}</MenuItem>
-        });
-        this.setState({ drawerRows });
-    }
+    handleToggle = () => { this.setState({ drawerOpen: !this.state.drawerOpen }) };
 
     render() {
         const { classes } = this.props;
@@ -81,30 +72,16 @@ class D3Graph extends Component {
         };
         return (
             <main className={classes.content}>
-                <Drawer
-                    anchor='right'
-                    width='100'
+                <NodeView
                     open={this.state.drawerOpen}
-                    onClose={this.handleDrawerToggle}>
-                    <div className={classes.toolbar}>
-                        <IconButton onClick={this.handleDrawerToggle}>
-                            <ClearIcon />
-                        </IconButton>
-                    </div>
-                    <ListItem>
-                        <ListItemIcon>
-                            <InfoIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Details" />
-                    </ListItem>
-                    {this.state.drawerRows}
-                </Drawer>
-
+                    node={this.state.highlightedNode}
+                    onToggle={this.handleToggle}
+                />
                 <Graph ref="graph" {...graphProps} />
             </main>
         );
     }
-    
+
 }
 
 D3Graph.propTypes = {
