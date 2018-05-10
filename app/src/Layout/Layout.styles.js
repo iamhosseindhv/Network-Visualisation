@@ -1,14 +1,7 @@
 const drawerWidth = 280;
 const styles = theme => ({
-    root: {
-        flexGrow: 1,
-        height: '100vh',
-        zIndex: 1,
-        overflow: 'hidden',
-        position: 'relative',
-        display: 'flex',
-    },
-    appBar: {
+    /* Uncomment if you needed app bar at the top */
+    /* appBar: {
         zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
@@ -29,7 +22,7 @@ const styles = theme => ({
     },
     hide: {
         display: 'none',
-    },
+    },*/
     drawerPaper: {
         position: 'relative',
         whiteSpace: 'nowrap',
@@ -49,11 +42,6 @@ const styles = theme => ({
         [theme.breakpoints.up('sm')]: {
             width: theme.spacing.unit * 9,
         },
-    },
-    content: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
-        // backgroundColor: '#303030',
     },
     toolbar: {
         display: 'flex',
