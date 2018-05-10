@@ -83,12 +83,7 @@ class Form extends Component {
     */
 
     render() {
-        const {
-            children,
-            classes,
-            theme,
-        } = this.props;
-
+        const { classes } = this.props;
         return (
             <Fragment>
                 <ListItem>
@@ -135,10 +130,6 @@ class Form extends Component {
 
 Form.propTypes = {
     /**
-     * The contents of the drawer.
-     */
-    children: PropTypes.node,
-    /**
      * Useful to extend the style applied to components.
      */
     classes: PropTypes.object.isRequired,
@@ -149,7 +140,7 @@ Form.propTypes = {
     /**
      * @param {object} event The event source of the callback
      */
-    onChange: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(Form);

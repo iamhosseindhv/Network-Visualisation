@@ -49,12 +49,7 @@ class Filters extends Component {
     updateData = graphData => { this.props.onChangeData(graphData) };
 
     render() {
-        const {
-            children,
-            classes,
-            theme,
-        } = this.props;
-
+        const { classes } = this.props;
         return (
             <Fragment>
                 <Divider />
@@ -79,10 +74,6 @@ class Filters extends Component {
 
 Filters.propTypes = {
     /**
-     * The contents of the drawer.
-     */
-    children: PropTypes.node,
-    /**
      * Useful to extend the style applied to components.
      */
     classes: PropTypes.object.isRequired,
@@ -93,7 +84,7 @@ Filters.propTypes = {
     /**
      * @param {object} event The event source of the callback
      */
-    onChangeData: PropTypes.func,
+    onChangeData: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(Filters);

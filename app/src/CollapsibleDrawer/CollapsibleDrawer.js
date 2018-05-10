@@ -27,7 +27,6 @@ class CollapsibleDrawer extends Component {
     render() {
         const {
             classes,
-            theme,
             onChangeForm,
             onChangeData,
         } = this.props;
