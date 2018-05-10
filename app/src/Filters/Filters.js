@@ -24,9 +24,6 @@ class Filters extends Component {
             currentGraph: '',
             availableGraphs: [],
         };
-        Utils.getAvailableGraphs()
-            .then(data => this.setState({ availableGraphs: data }))
-            .catch(this.handleError);
     };
 
     handleGraphChange = event => {
@@ -47,6 +44,12 @@ class Filters extends Component {
     handleChange = event => { this.setState({ [event.target.name]: event.target.value }) };
 
     updateData = graphData => { this.props.onChangeData(graphData) };
+
+    componentDidMount = () => {
+        Utils.getAvailableGraphs()
+            .then(data => this.setState({ availableGraphs: data }))
+            .catch(this.handleError);
+    }
 
     render() {
         const { classes } = this.props;

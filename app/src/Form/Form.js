@@ -35,8 +35,8 @@ class Form extends Component {
             link: {},
         }
     }
-
-    componentWillMount = () => { this.formDidChange() };
+    
+    componentDidMount = () => { this.formDidChange() };
 
     formDidChange = () => { this.props.onChange(this.state) };
 
