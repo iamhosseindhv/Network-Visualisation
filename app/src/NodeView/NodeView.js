@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import classNames from 'classnames';
+import { ListItemText } from 'material-ui/List';
 import { MenuItem } from 'material-ui/Menu';
 import IconButton from 'material-ui/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -30,30 +31,25 @@ class NodeView extends Component {
     }
 
     render() {
-        const { 
+        const {
             classes,
             open,
-            onToggle,
+            onClose,
         } = this.props;
 
         return (
             <Drawer
                 anchor='right'
-                width='100'
+                variant='persistent'
+                classes={{ paper: classNames(classes.drawerPaper) }}
                 open={open}
-                onClose={onToggle}
             >
                 <div className={classes.toolbar}>
-                    <IconButton onClick={onToggle}>
+                    <IconButton onClick={onClose}>
                         <ClearIcon />
                     </IconButton>
+                    <ListItemText primary="Info" />
                 </div>
-                <ListItem>
-                    <ListItemIcon>
-                        <InfoIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Details" />
-                </ListItem>
                 {this.state.drawerRows}
             </Drawer>
         );
@@ -80,7 +76,7 @@ NodeView.propTypes = {
     /**
      * @param {object} event The event source of the callback
      */
-    onToggle: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(NodeView);

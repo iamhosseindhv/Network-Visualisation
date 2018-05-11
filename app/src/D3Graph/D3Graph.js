@@ -36,20 +36,26 @@ class D3Graph extends Component {
 
     onDoubleClickNode = node => {
         const presentDrawer = this.state.presentDrawer;
-        if (presentDrawer) {
+        if (!presentDrawer) {
+            this.setState({ presentDrawer: true });
+        } else {
             this.setState({
                 highlightedNode: node,
                 drawerOpen: !this.state.drawerOpen,
             });
         }
-        this.setState({ presentDrawer: !presentDrawer });
     }
 
     onMouseOverNode = node => { /*console.log(`Mouse is over node (${node})`);*/ }
 
     onMouseOutNode = node => { /*console.log(`Mouse is out of node (${node})`);*/ }
 
-    handleToggle = () => { this.setState({ drawerOpen: !this.state.drawerOpen }) };
+    handleClose = () => {
+        this.setState({
+            drawerOpen: false,
+            presentDrawer: false,
+        });
+    };
 
     render() {
         const { classes } = this.props;
@@ -75,7 +81,7 @@ class D3Graph extends Component {
                 <NodeView
                     open={this.state.drawerOpen}
                     node={this.state.highlightedNode}
-                    onToggle={this.handleToggle}
+                    onClose={this.handleClose}
                 />
                 <Graph ref="graph" {...graphProps} />
             </main>
