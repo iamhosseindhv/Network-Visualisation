@@ -214,7 +214,7 @@ function buildLinkProps(
             break;
         default:
             // 1st degree is the fallback behavior
-            mainNodeParticipates = source === highlightedNode || target === highlightedNode;
+            mainNodeParticipates = source == highlightedNode || target == highlightedNode;
             break;
     }
 
