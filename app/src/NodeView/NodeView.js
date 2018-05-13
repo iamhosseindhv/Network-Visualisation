@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import { ListItemText } from 'material-ui/List';
-import { MenuItem } from 'material-ui/Menu';
+import { ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import InfoIcon from '@material-ui/icons/Info';
@@ -25,7 +25,7 @@ class NodeView extends Component {
         const node = nextProps.node, open = nextProps.open;
         const drawerRows = Object.entries(node).map((item, index) => {
             const key = item[0], value = item[1];
-            return <MenuItem key={index} value={value}>{key}: {value}</MenuItem>
+            return <ListItem key={index} value={value}>{key}: {value}</ListItem>
         });
         this.setState({ drawerRows, open });
     }
