@@ -10,6 +10,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import Drawer from 'material-ui/Drawer';
 import styles from './NodeView.styles';
 
+const NODE_KEY_BLACKLIST = ['symbolType', 'highlighted', 'x', 'y', 'index', 'vy', 'vx'];
 
 class NodeView extends Component {
     constructor(props) {
@@ -20,12 +21,27 @@ class NodeView extends Component {
         }
     }
 
+    omitKeys = (obj) => {
+        var dup = {};
+        for (var key in obj) {
+            if (NODE_KEY_BLACKLIST.indexOf(key) == -1) {
+                dup[key] = obj[key];
+            }
+        }
+        return dup;
+    }
+
     componentWillReceiveProps = (nextProps) => {
         //TODO: first check if there're differences
-        const node = nextProps.node, open = nextProps.open;
-        const drawerRows = Object.entries(node).map((item, index) => {
+        const open = nextProps.open;
+        const ddd = this.omitKeys(nextProps.node);
+        const drawerRows = Object.entries(ddd).map((item, index) => {
             const key = item[0], value = item[1];
-            return <ListItem key={index} value={value}>{key}: {value}</ListItem>
+            return (
+                <ListItem key={index} value={value}>
+                    <ListItemText secondary={`${key}`} primary={`${value}`} />
+                </ListItem>
+            )
         });
         this.setState({ drawerRows, open });
     }
