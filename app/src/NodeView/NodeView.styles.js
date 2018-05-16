@@ -16,6 +16,9 @@ const styles = theme => ({
         padding: '0 8px',
         ...theme.mixins.toolbar,
     },
+    secondayText: {
+        flex: `0 1 ${theme.spacing.unit * 5}px`,
+    }
 });
 
 export default styles;
