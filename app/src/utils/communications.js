@@ -16,15 +16,15 @@ const getAvailableGraphs = async () => {
 
 
 const getGraphData = async (graphId) => {
-    // const url = '/api/graph_data/' + graphId;
-    // const response = await fetch(url);
-    // const body = await response.json();
-    // if (response.status !== 200) throw Error(body.message);
-    // return body;
+    const url = '/api/graph_data/' + graphId;
+    const response = await fetch(url);
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
 
     //fake async
     // console.log('Getting data for ' + graphId);
-    return data;
+    // return data;
 };
 
 

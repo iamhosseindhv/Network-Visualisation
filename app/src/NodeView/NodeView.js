@@ -33,7 +33,11 @@ class NodeView extends Component {
 
     componentWillReceiveProps = (nextProps) => {
         //TODO: first check if there're differences
-        const { classes, node, open } = nextProps;
+        const {
+            classes,
+            node,
+            ope
+        } = nextProps;
         const necessaryKeys = this.omitKeys(node);
         const drawerRows = Object.entries(necessaryKeys).map((item, index) => {
             const key = item[0], value = item[1];
