@@ -12,22 +12,26 @@ const RootWrapper = styled.div`
     display: flex;
 `;
 
-const muiTheme = createMuiTheme({
-    palette: {
-        primary: {
-            light: purple[300],
-            main: purple[500],
-            dark: purple[700],
+const getMuiTheme = (darkTheme = false) => {
+    const type = darkTheme ? 'dark' : 'light';
+    return createMuiTheme({
+        palette: {
+            type: type,
+            primary: {
+                light: purple[300],
+                main: purple[500],
+                dark: purple[700],
+            },
+            secondary: {
+                light: green[300],
+                main: green[500],
+                dark: green[700],
+            },
         },
-        secondary: {
-            light: green[300],
-            main: green[500],
-            dark: green[700],
-        },
-    },
-});
+    });
+};
 
 export {
     RootWrapper,
-    muiTheme,
+    getMuiTheme,
 };
