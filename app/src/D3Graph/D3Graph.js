@@ -20,9 +20,10 @@ class D3Graph extends Component {
     }
 
     componentWillReceiveProps = newProps => {
-        //TODO: first check for difference
-        const config = createConfig(newProps.config);
-        this.setState({ config: config });
+        //TODO: check for differences, and update (if there were any diff)
+        const darkTheme = newProps.config.isDarkTheme;
+        const config = createConfig(newProps.config, darkTheme);
+        this.setState({ config });
         //if there is data
         if (Object.keys(newProps.data).length !== 0) {
             this.setState({
