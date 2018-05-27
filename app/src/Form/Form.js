@@ -10,6 +10,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 const defaultSetting = {
     renderLabel: true,
     staticGraph: false,
+    isDarkTheme: false,
 };
 
 const constants = {
@@ -33,9 +34,10 @@ class Form extends Component {
                 renderLabel: defaultSetting.renderLabel,
             },
             link: {},
+            isDarkTheme: defaultSetting.isDarkTheme,
         }
     }
-    
+
     componentDidMount = () => { this.formDidChange() };
 
     formDidChange = () => { this.props.onChange(this.state) };
@@ -63,6 +65,10 @@ class Form extends Component {
         }
     }
 
+    handleThemeChange = () => {
+        this.setState({ isDarkTheme: !this.state.isDarkTheme }, () => this.formDidChange());
+    }
+    
     /*
     // TODO: modify the function below and replace
     // code in handleChang to avoide code duplication
@@ -120,6 +126,18 @@ class Form extends Component {
                                 />
                             }
                             label="Static Graph"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    defaultChecked={defaultSetting.isDarkTheme}
+                                    checked={this.state.isDarkTheme}
+                                    onChange={this.handleThemeChange}
+                                    value="themeDark"
+                                    color="primary"
+                                />
+                            }
+                            label="Dark Theme"
                         />
                     </FormGroup>
                 </ListItem>
