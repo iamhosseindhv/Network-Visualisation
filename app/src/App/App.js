@@ -17,17 +17,12 @@ class App extends Component {
 
 
     onChangeForm = config => {
-        const themeType = config.isDarkTheme ? 'dark' : 'light';
-        //if theme has changed, then create a new one
-        if (this.state.theme.palette.type !== themeType){
-            const newTheme = getMuiTheme(config.isDarkTheme);
-            this.setState({
-                theme: newTheme,
-                graphConfig: config,
-            })
-        } else {
-            this.setState({ graphConfig: config })
-        }
+        //TODO: check for differendces first
+        const newTheme = getMuiTheme(config.isDarkTheme);
+        this.setState({
+            theme: newTheme,
+            graphConfig: config,
+        });
     };
 
     onChangeData = data => { this.setState({ graphData: data }) };
