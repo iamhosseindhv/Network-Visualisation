@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Typography from '@material-ui/core/Typography';
@@ -48,11 +47,18 @@ Subheader.propTypes = {
      * @ignore
      */
     theme: PropTypes.object.isRequired,
-    //...
-    //...
-    //...
-    //...
-    //...
+    /**
+     * Just a sensible id 
+     */
+    id: PropTypes.string.isRequired,
+    /**
+     * The actual text of the subheader 
+     */
+    title: PropTypes.string.isRequired,
+    /**
+     * An icon component (e.g. <SearchIcon />)
+     */
+    icon: PropTypes.node.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(Subheader);
