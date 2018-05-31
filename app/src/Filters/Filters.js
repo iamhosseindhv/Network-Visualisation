@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Divider from 'material-ui/Divider';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
-import { InputLabel } from 'material-ui/Input';
-import { ListItem } from 'material-ui/List';
-import { FormControl } from 'material-ui/Form';
+import Divider from '@material-ui/core/Divider';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import ListItem from '@material-ui/core/ListItem';
+import FormControl from '@material-ui/core/FormControl';
+import SearchIcon from '@material-ui/icons/Search';
+import Subheader from '../Subheader/Subheader';
 import Utils from '../utils/communications';
 
 
@@ -55,6 +57,7 @@ class Filters extends Component {
         const { classes } = this.props;
         return (
             <Fragment>
+                <Subheader id="graph-search" title="Search" icon={<SearchIcon />}/>
                 <ListItem >
                     <FormControl className={classes.formControl}>
                         <InputLabel htmlFor="graph-id">Choose your graph</InputLabel>
