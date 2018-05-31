@@ -1,11 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { FormGroup, FormControlLabel } from 'material-ui/Form';
-import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import Checkbox from 'material-ui/Checkbox';
-import Divider from 'material-ui/Divider';
+import { withStyles } from '@material-ui/core/styles';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Tooltip from '@material-ui/core/Tooltip';
+import Checkbox from '@material-ui/core/Checkbox';
+import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
+import Brightness2Icon from '@material-ui/icons/Brightness2';
+import Brightness5Icon from '@material-ui/icons/Brightness5';
 
 const defaultSetting = {
     renderLabel: true,
@@ -20,7 +31,17 @@ const constants = {
 };
 
 const styles = theme => ({
-    //...
+    iconGroup: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    icon : {
+        fontSize: '50px',
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        border: '1px solid ' + theme.palette.divider,
+    },
 });
 
 class Form extends Component {
@@ -43,11 +64,11 @@ class Form extends Component {
     formDidChange = () => { this.props.onChange(this.state) };
 
     handleChange = position => event => {
-        const name = event.target.name;
+        const name = event.currentTarget.name;
         switch (position) {
             case constants.GRAPH:
                 var graph = { ...this.state.graph }
-                graph[name] = event.target.checked;
+                graph[name] = !graph[name];
                 this.setState({ graph }, () => this.formDidChange());
                 break;
             case constants.NODE:
@@ -68,25 +89,6 @@ class Form extends Component {
     handleThemeChange = () => {
         this.setState({ isDarkTheme: !this.state.isDarkTheme }, () => this.formDidChange());
     }
-    
-    /*
-    // TODO: modify the function below and replace
-    // code in handleChang to avoide code duplication
-    updateState = (source, name, event) => {
-        var dest = { ...this.state[source] }
-        // console.log(dest);
-        dest[name] = event.target.checked;
-        // console.log(dest);
-        console.log(this.state);
-        this.setState({ source: dest }, () => {
-            console.log(this.state);
-            this.formDidChange()
-        });
-    }*/
-    /*
-    // or see if you can choose this one
-    handleChange = event => { this.setState({ [event.target.name]: event.target.value }) };
-    */
 
     render() {
         const { classes } = this.props;
@@ -99,6 +101,26 @@ class Form extends Component {
                     <ListItemText primary="Configurations" />
                 </ListItem>
                 <Divider />
+                <ListItem>
+                    <div className={classes.iconGroup}>
+                        {/* <Tooltip id="tooltip-reset" title="Reset"> */}
+                            <IconButton className={classes.icon} onClick={this.handleDrawerToggle}>
+                                <RefreshIcon />
+                            </IconButton>
+                        {/* </Tooltip>
+                        <Tooltip id="tooltip-static" title={this.state.graph.staticGraph ? 'Dynamic' : 'Static'}> */}
+                            <IconButton className={classes.icon} name="staticGraph" onClick={this.handleChange(constants.GRAPH)}>
+                                {this.state.graph.staticGraph ? <PlayArrowIcon /> : <PauseIcon />}
+                            </IconButton>
+                        {/* </Tooltip>
+                        <Tooltip id="tooltip-dark" title={this.state.isDarkTheme ? 'Light Mode' : 'Dark Mode'}> */}
+                            <IconButton className={classes.icon} onClick={this.handleThemeChange}>
+                                {this.state.isDarkTheme ? <Brightness5Icon /> : <Brightness2Icon />}
+                            </IconButton>
+                        {/* </Tooltip> */}
+                    </div>
+                </ListItem>
+                {/* <Divider /> */}
                 <ListItem >
                     <FormGroup>
                         <FormControlLabel
@@ -113,31 +135,6 @@ class Form extends Component {
                                 />
                             }
                             label="Render Labels"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    defaultChecked={defaultSetting.staticGraph}
-                                    checked={this.state.graph.staticGraph}
-                                    onChange={this.handleChange(constants.GRAPH)}
-                                    value="staticGraph"
-                                    name="staticGraph"
-                                    color="primary"
-                                />
-                            }
-                            label="Static Graph"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    defaultChecked={defaultSetting.isDarkTheme}
-                                    checked={this.state.isDarkTheme}
-                                    onChange={this.handleThemeChange}
-                                    value="themeDark"
-                                    color="primary"
-                                />
-                            }
-                            label="Dark Theme"
                         />
                     </FormGroup>
                 </ListItem>
@@ -156,8 +153,8 @@ Form.propTypes = {
      */
     theme: PropTypes.object.isRequired,
     /**
-     * @param {object} event The event source of the callback
-     */
+* @param {object} event The event source of the callback
+    */
     onChange: PropTypes.func.isRequired,
 };
 
