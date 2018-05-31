@@ -103,24 +103,23 @@ class Form extends Component {
                 <Divider />
                 <ListItem>
                     <div className={classes.iconGroup}>
-                        {/* <Tooltip id="tooltip-reset" title="Reset"> */}
+                        <Tooltip id="tooltip-reset" title="Reset">
                             <IconButton className={classes.icon} onClick={this.handleDrawerToggle}>
                                 <RefreshIcon />
                             </IconButton>
-                        {/* </Tooltip>
-                        <Tooltip id="tooltip-static" title={this.state.graph.staticGraph ? 'Dynamic' : 'Static'}> */}
+                        </Tooltip>
+                        <Tooltip id="tooltip-static" title={this.state.graph.staticGraph ? 'Dynamic' : 'Static'}>
                             <IconButton className={classes.icon} name="staticGraph" onClick={this.handleChange(constants.GRAPH)}>
                                 {this.state.graph.staticGraph ? <PlayArrowIcon /> : <PauseIcon />}
                             </IconButton>
-                        {/* </Tooltip>
-                        <Tooltip id="tooltip-dark" title={this.state.isDarkTheme ? 'Light Mode' : 'Dark Mode'}> */}
+                        </Tooltip>
+                        <Tooltip id="tooltip-dark" title={this.state.isDarkTheme ? 'Light Mode' : 'Dark Mode'}>
                             <IconButton className={classes.icon} onClick={this.handleThemeChange}>
                                 {this.state.isDarkTheme ? <Brightness5Icon /> : <Brightness2Icon />}
                             </IconButton>
-                        {/* </Tooltip> */}
+                        </Tooltip>
                     </div>
                 </ListItem>
-                {/* <Divider /> */}
                 <ListItem >
                     <FormGroup>
                         <FormControlLabel
