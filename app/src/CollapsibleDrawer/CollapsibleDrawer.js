@@ -56,9 +56,8 @@ class CollapsibleDrawer extends Component {
                     </IconButton>
                 </div>
                 <Divider />
-                {/* Configurations */}
                 <Form onChange={onChangeForm} />
-                {/* Search and filters */}
+                <Divider />
                 <Filters onChangeData={onChangeData} />
             </Drawer>
         );
