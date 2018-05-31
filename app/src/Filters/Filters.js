@@ -55,7 +55,6 @@ class Filters extends Component {
         const { classes } = this.props;
         return (
             <Fragment>
-                <Divider />
                 <ListItem >
                     <FormControl className={classes.formControl}>
                         <InputLabel htmlFor="graph-id">Choose your graph</InputLabel>
