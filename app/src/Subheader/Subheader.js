@@ -11,7 +11,7 @@ const styles = theme => ({
         paddingLeft: theme.spacing.unit,
         fontSize: '1rem',
         fontWeight: 400,
-        color: 'rgba(0, 0, 0, 0.54)',
+        color: theme.typography.caption.color,
         marginTop: theme.spacing.unit - 1,
     },
 });
@@ -37,6 +37,7 @@ class Subheader extends Component {
         );
     }
 }
+
 
 Subheader.propTypes = {
     /**
