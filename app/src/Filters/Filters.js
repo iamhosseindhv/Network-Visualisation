@@ -15,7 +15,7 @@ import Utils from '../utils/communications';
 const styles = theme => ({
     formControl: {
         // margin: theme.spacing.unit,
-        minWidth: '100%',
+        minWidth: '100% !important',
     },
 });
 
