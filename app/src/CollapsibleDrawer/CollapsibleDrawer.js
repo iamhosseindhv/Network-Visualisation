@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import Drawer from 'material-ui/Drawer';
+import Divider from '@material-ui/core/Divider';
 /* Uncomment if you needed app bar at the top */
 /*import Typography from 'material-ui/Typography';
 import AppBar from 'material-ui/AppBar';
@@ -54,6 +55,7 @@ class CollapsibleDrawer extends Component {
                         {this.state.open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </div>
+                <Divider />
                 {/* Configurations */}
                 <Form onChange={onChangeForm} />
                 {/* Search and filters */}
