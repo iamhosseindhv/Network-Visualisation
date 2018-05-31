@@ -4,19 +4,16 @@ import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 import Checkbox from '@material-ui/core/Checkbox';
-import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import SettingsIcon from '@material-ui/icons/Settings';
 import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 import Brightness2Icon from '@material-ui/icons/Brightness2';
 import Brightness5Icon from '@material-ui/icons/Brightness5';
+import Subheader from '../Subheader/Subheader';
 
 const defaultSetting = {
     renderLabel: true,
@@ -36,7 +33,7 @@ const styles = theme => ({
         display: 'flex',
         justifyContent: 'center',
     },
-    icon : {
+    icon: {
         fontSize: '50px',
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
@@ -94,13 +91,7 @@ class Form extends Component {
         const { classes } = this.props;
         return (
             <Fragment>
-                <ListItem>
-                    <ListItemIcon>
-                        <InboxIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Configurations" />
-                </ListItem>
-                <Divider />
+                <Subheader id="graph-setting" title="Graph setting" icon={<SettingsIcon />} />
                 <ListItem>
                     <div className={classes.iconGroup}>
                         <Tooltip id="tooltip-reset" title="Reset">
@@ -120,7 +111,7 @@ class Form extends Component {
                         </Tooltip>
                     </div>
                 </ListItem>
-                <ListItem >
+                <ListItem>
                     <FormGroup>
                         <FormControlLabel
                             control={
@@ -133,7 +124,7 @@ class Form extends Component {
                                     color="primary"
                                 />
                             }
-                            label="Render Labels"
+                            label="Node Labels"
                         />
                     </FormGroup>
                 </ListItem>
@@ -152,7 +143,7 @@ Form.propTypes = {
      */
     theme: PropTypes.object.isRequired,
     /**
-* @param {object} event The event source of the callback
+    * @param {object} event The event source of the callback
     */
     onChange: PropTypes.func.isRequired,
 };
