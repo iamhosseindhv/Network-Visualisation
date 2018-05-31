@@ -14,13 +14,13 @@
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run app\""
   },
   "dependencies": {
+    "@material-ui/core": "^1.1.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "hbs": "~4.0.1",
     "http-errors": "~1.6.2",
-    "material-ui": "^1.0.0-beta.44",
     "morgan": "~1.9.0",
     "mysql": "^2.15.0",
     "styled-components": "^3.2.6"
