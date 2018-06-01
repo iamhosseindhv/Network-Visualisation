@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import { ListItemText } from 'material-ui/List';
-import { ListItem } from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import InfoIcon from '@material-ui/icons/Info';
-import Drawer from 'material-ui/Drawer';
+import Drawer from '@material-ui/core/Drawer';
 import styles from './NodeView.styles';
 
 const NODE_KEY_BLACKLIST = ['symbolType', 'highlighted', 'x', 'y', 'index', 'vx', 'vy', 'fx', 'fy'];
