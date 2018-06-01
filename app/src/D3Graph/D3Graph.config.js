@@ -4,6 +4,7 @@ const theme = {
         node: {
             color: 'red',
             highlightColor: 'lightgreen',
+            fontColor: '#f2f2f2',
         },
         link: {
             highlightColor: '#484848',
@@ -13,6 +14,7 @@ const theme = {
         node: {
             color: '#d3d3d3',
             highlightColor: 'lightgreen',
+            fontColor: '#484848',
         },
         link: {
             highlightColor: '#484848',
@@ -32,6 +34,7 @@ const getDefaultConfig = (themeType) => {
         node: {
             color: theme[themeType].node.color,
             highlightColor: theme[themeType].node.highlightColor,
+            fontColor: theme[themeType].node.fontColor,
             labelProperty: 'name',
             size: 200,
         },
