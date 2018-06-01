@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MuiThemeProvider } from 'material-ui/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import D3Graph from '../D3Graph/D3Graph';
 import CollapsibleDrawer from '../CollapsibleDrawer/CollapsibleDrawer';
 import { RootWrapper, getMuiTheme } from './App.styles';
