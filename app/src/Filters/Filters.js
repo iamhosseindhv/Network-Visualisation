@@ -147,8 +147,6 @@ class Filters extends Component {
                             className={formControlClassName}
                             datasource={locationDatasource}
                         />
-                        {/* 1. make chips to come together instead under each other
-                               and put a max height for job container to avoid problems when too may chips */}
                         <FormInput
                             title="💼 Job"
                             name="occupation"
@@ -158,11 +156,12 @@ class Filters extends Component {
                             multiple={true}
                             input={<Input id="occupation" />}
                             MenuProps={MenuProps}
+                            className={formControlClassName}
                             disabled={this.state.disableFilters}
                             renderValue={this.handleChipRender(classes)}
                             datasource={jobDatasource.map(job => (
                                 <MenuItem key={job} value={job}>
-                                    <Checkbox checked={this.state.graphData.occupation.indexOf(job) > -1} />
+                                    <Checkbox color="primary" checked={this.state.graphData.occupation.indexOf(job) > -1} />
                                     <ListItemText primary={job} />
                                 </MenuItem>
                             ))}

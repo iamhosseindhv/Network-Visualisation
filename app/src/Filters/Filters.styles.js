@@ -1,4 +1,6 @@
 const containerWidth = 232;
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
 const styles = theme => ({
     root: {
         display: 'flex',
@@ -6,6 +8,7 @@ const styles = theme => ({
         minWidth: containerWidth,
     },
     formControl: {
+        marginBottom: theme.spacing.unit,
         minWidth: (containerWidth / 2) - theme.spacing.unit,
     },
     formControlMoveRight: {
@@ -36,14 +39,15 @@ const styles = theme => ({
     chips: {
         display: 'flex',
         flexWrap: 'wrap',
+        maxHeight: ITEM_HEIGHT * 4,
+        overflowX: 'scroll',
     },
     chip: {
         margin: theme.spacing.unit / 4,
+        fontSize: 10,
     },
 });
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
 const MenuProps = {
     PaperProps: {
         style: {
