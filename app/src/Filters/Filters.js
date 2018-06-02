@@ -36,6 +36,17 @@ const styles = theme => ({
     },
 });
 
+/* full version of a state
+this.state = {
+    currentGraph: 'test',
+    availableGraphs: [{name: 'test', graph_id:'10'}, {name: 'test2', graph_id:'20'}],
+    infoGender: 'Male',
+    infoLocation: 'Tehran',
+    infoAge: '25-30',
+    infoOccupation: ['skill0', 'skill1', 'skill2'],
+};
+*/
+
 class Filters extends Component {
     constructor(props) {
         super(props)
@@ -95,7 +106,17 @@ class Filters extends Component {
                                 })}
                             </Select>
                         </FormControl>
-                    
+                        <FormControl className={formControlClassName}>
+                            <InputLabel htmlFor="info-gender">Gender</InputLabel>
+                            <Select
+                                value={this.state.infoGender}
+                                onChange={this.handleChange}
+                                inputProps={{ name: "infoGender", id: "info-gender" }}
+                            >
+                                <MenuItem key={1} value="Male">Male</MenuItem>
+                                <MenuItem key={2} value="Female">Female</MenuItem>
+                            </Select>
+                        </FormControl>
                     </form>
                 </ListItem >
             </Fragment>
