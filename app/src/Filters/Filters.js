@@ -10,6 +10,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import SearchIcon from '@material-ui/icons/Search';
 import Subheader from '../Subheader/Subheader';
+import FormInput from './FormInput';
 import Utils from '../utils/communications';
 import styles from './Filters.styles';
 
@@ -20,31 +21,6 @@ const genderDatasource = ['Male', 'Female'].map((gender, i) => {
 const ageDatasource = ['20-25', '25-30', '30-40', '40-50', '50-60', '60-100'].map((age, i) => {
     return <MenuItem key={i} value={age}>{age}</MenuItem>
 });
-
-function InputFilter(props) {
-    const {
-        title,
-        name,
-        value,
-        onChange,
-        datasource,
-    } = props;
-    const fullWidth = props.fullWidth || false;
-    const disabled = props.disabled || false;
-    const className = classNames(props.className, props.secondaryClassName);
-    return (
-        <FormControl fullWidth={fullWidth} className={className} disabled={disabled}>
-            <InputLabel htmlFor={name}>{title}</InputLabel>
-            <Select
-                value={value}
-                onChange={onChange}
-                inputProps={{ name: name, id: name }}
-            >
-                {datasource}
-            </Select>
-        </FormControl>
-    )
-};
 
 class Filters extends Component {
     constructor(props) {
@@ -107,7 +83,7 @@ class Filters extends Component {
                 <Subheader id="graph-search" title="Search" icon={<SearchIcon />} />
                 <ListItem>
                     <form className={classes.root}>
-                        <InputFilter
+                        <FormInput
                             title="Choose your graph"
                             name="currentGraph"
                             value={this.state.currentGraph}
@@ -119,7 +95,7 @@ class Filters extends Component {
                             })}
                         />
                         <FormGroup row>
-                            <InputFilter
+                            <FormInput
                                 title="Gender"
                                 name="gender"
                                 value={this.state.graphData.gender}
@@ -129,7 +105,7 @@ class Filters extends Component {
                                 disabled={this.state.disableFilters}
                                 datasource={genderDatasource}
                             />
-                            <InputFilter
+                            <FormInput
                                 title="Age"
                                 name="age_range"
                                 value={this.state.graphData.age_range}
