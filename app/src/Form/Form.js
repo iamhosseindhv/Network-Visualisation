@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ListItem from '@material-ui/core/ListItem';
+import FormControl from '@material-ui/core/FormControl';
 import Tooltip from '@material-ui/core/Tooltip';
 import Checkbox from '@material-ui/core/Checkbox';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -27,7 +28,13 @@ const constants = {
     LINK: 2,
 };
 
+const containerWidth = 232;
 const styles = theme => ({
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        minWidth: containerWidth,
+    },
     iconGroup: {
         width: '100%',
         display: 'flex',
@@ -38,6 +45,20 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         border: '1px solid ' + theme.palette.divider,
+    },
+    formControlMoveRight: {
+        transform: 'translate3d(' + theme.spacing.unit * 6 + 'px, 0, 0)',
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.leavingScreen,
+            easing: theme.transitions.easing.sharp,
+        }),
+    },
+    formControlMoveLeft: {
+        transform: 'translate3d(0, 0, 0)',
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.leavingScreen,
+            easing: theme.transitions.easing.sharp,
+        }),
     },
 });
 
@@ -88,7 +109,7 @@ class Form extends Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, open } = this.props;
         return (
             <Fragment>
                 <Subheader id="graph-setting" title="Graph setting" icon={<SettingsIcon />} />
@@ -112,21 +133,23 @@ class Form extends Component {
                     </div>
                 </ListItem>
                 <ListItem>
-                    <FormGroup>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    defaultChecked={defaultSetting.renderLabel}
-                                    checked={this.state.node.renderLabel}
-                                    onChange={this.handleChange(constants.NODE)}
-                                    value="renderLabel"
-                                    name="renderLabel"
-                                    color="primary"
-                                />
-                            }
-                            label="Node Labels"
-                        />
-                    </FormGroup>
+                    <form className={classes.root}>
+                        <FormControl fullWidth={true} className={open ? classes.formControlMoveLeft : classes.formControlMoveRight}>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        defaultChecked={defaultSetting.renderLabel}
+                                        checked={this.state.node.renderLabel}
+                                        onChange={this.handleChange(constants.NODE)}
+                                        value="renderLabel"
+                                        name="renderLabel"
+                                        color="primary"
+                                    />
+                                }
+                                label="Node Labels"
+                            />
+                        </FormControl>
+                    </form>
                 </ListItem>
             </Fragment>
         );
@@ -142,6 +165,11 @@ Form.propTypes = {
      * @ignore
      */
     theme: PropTypes.object.isRequired,
+    /**
+     * Whether the left drawer is open or not.
+     * Needed for transition of input elements
+     */
+    open: PropTypes.bool.isRequired,
     /**
     * @param {object} event The event source of the callback
     */
