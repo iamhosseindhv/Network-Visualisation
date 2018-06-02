@@ -21,6 +21,31 @@ const ageDatasource = ['20-25', '25-30', '30-40', '40-50', '50-60', '60-100'].ma
     return <MenuItem key={i} value={age}>{age}</MenuItem>
 });
 
+function InputFilter(props) {
+    const {
+        title,
+        name,
+        value,
+        onChange,
+        datasource,
+    } = props;
+    const fullWidth = props.fullWidth || false;
+    const disabled = props.disabled || false;
+    const className = classNames(props.className, props.secondaryClassName);
+    return (
+        <FormControl fullWidth={fullWidth} className={className} disabled={disabled}>
+            <InputLabel htmlFor={name}>{title}</InputLabel>
+            <Select
+                value={value}
+                onChange={onChange}
+                inputProps={{ name: name, id: name }}
+            >
+                {datasource}
+            </Select>
+        </FormControl>
+    )
+};
+
 class Filters extends Component {
     constructor(props) {
         super(props)
@@ -82,39 +107,38 @@ class Filters extends Component {
                 <Subheader id="graph-search" title="Search" icon={<SearchIcon />} />
                 <ListItem>
                     <form className={classes.root}>
-                        <FormControl fullWidth="true" className={formControlClassName}>
-                            <InputLabel htmlFor="currentGraph">Choose your graph</InputLabel>
-                            <Select
-                                value={this.state.currentGraph}
-                                onChange={this.handleChange}
-                                inputProps={{ name: "currentGraph", id: "currentGraph" }}
-                            >
-                                {this.state.availableGraphs.map(graph => {
-                                    return <MenuItem key={graph.id} value={graph.name}>{graph.name}</MenuItem>
-                                })}
-                            </Select>
-                        </FormControl>
+                        <InputFilter
+                            title="Choose your graph"
+                            name="currentGraph"
+                            value={this.state.currentGraph}
+                            onChange={this.handleChange}
+                            fullWidth={true}
+                            className={formControlClassName}
+                            datasource={this.state.availableGraphs.map(graph => {
+                                return <MenuItem key={graph.id} value={graph.name}>{graph.name}</MenuItem>
+                            })}
+                        />
                         <FormGroup row>
-                            <FormControl className={classNames(formControlClassName, classes.formControlLeft)} disabled={this.state.disableFilters}>
-                                <InputLabel htmlFor="gender">Gender</InputLabel>
-                                <Select
-                                    value={this.state.graphData.gender}
-                                    onChange={this.handleChange}
-                                    inputProps={{ name: "gender", id: "gender" }}
-                                >
-                                    {genderDatasource}
-                                </Select>
-                            </FormControl>
-                            <FormControl className={classNames(formControlClassName, classes.formControlRight)} disabled={this.state.disableFilters}>
-                                <InputLabel htmlFor="age_range">Age</InputLabel>
-                                <Select
-                                    value={this.state.graphData.age_range}
-                                    onChange={this.handleChange}
-                                    inputProps={{ name: "age_range", id: "age_range" }}
-                                >
-                                    {ageDatasource}
-                                </Select>
-                            </FormControl>
+                            <InputFilter
+                                title="Gender"
+                                name="gender"
+                                value={this.state.graphData.gender}
+                                onChange={this.handleChange}
+                                className={formControlClassName}
+                                secondaryClassName={classes.formControlLeft}
+                                disabled={this.state.disableFilters}
+                                datasource={genderDatasource}
+                            />
+                            <InputFilter
+                                title="Age"
+                                name="age_range"
+                                value={this.state.graphData.age_range}
+                                onChange={this.handleChange}
+                                className={formControlClassName}
+                                secondaryClassName={classes.formControlRight}
+                                disabled={this.state.disableFilters}
+                                datasource={ageDatasource}
+                            />
                         </FormGroup>
                     </form>
                 </ListItem >
