@@ -28,7 +28,32 @@ const styles = theme => ({
     formControlRight: {
         marginLeft: theme.spacing.unit,
     },
+    formControlJobs: {
+        margin: theme.spacing.unit,
+        minWidth: 120,
+        maxWidth: 300,
+    },
+    chips: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    chip: {
+        margin: theme.spacing.unit / 4,
+    },
 });
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 208,
+        },
+    },
+};
 
-export default styles;
+export {
+    styles,
+    MenuProps,
+};

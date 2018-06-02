@@ -9,18 +9,21 @@ import ListItem from '@material-ui/core/ListItem';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import SearchIcon from '@material-ui/icons/Search';
+import Chip from '@material-ui/core/Chip';
+import Input from '@material-ui/core/Input';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
 import Subheader from '../Subheader/Subheader';
 import FormInput from './FormInput';
+import { MenuProps, styles } from './Filters.styles';
 import Utils from '../utils/communications';
-import styles from './Filters.styles';
+import {
+    genderDatasource,
+    ageDatasource,
+    locationDatasource,
+    jobDatasource
+} from '../utils/filterDatasources';
 
-const genderDatasource = ['Male', 'Female'].map((gender, i) => {
-    return <MenuItem key={i} value={gender.toLowerCase()}>{gender}</MenuItem>
-});
-
-const ageDatasource = ['20-25', '25-30', '30-40', '40-50', '50-60', '60-100'].map((age, i) => {
-    return <MenuItem key={i} value={age}>{age}</MenuItem>
-});
 
 class Filters extends Component {
     constructor(props) {
@@ -49,24 +52,31 @@ class Filters extends Component {
             .catch(this.handleError);
     };
 
-    handleError = (err) => {
-        // here you may present a snackBar to tell the user something has gone wrong,
+    handleError = err => {
+        // here you may present a snackBar to tell the user something went wrong,
         // but for now just console.log
         console.log(err);
     };
 
     handleChange = event => {
         const isGraphChange = event.target.name === 'currentGraph';
-        var newState = Object.assign({}, this.state);
+        let newState = Object.assign({}, this.state);
         if (isGraphChange) {
             newState.currentGraph = event.target.value;
             newState.disableFilters = false;
         } else {
             newState.graphData[event.target.name] = event.target.value;
         }
-        this.setState(newState, () => {
-            this.updateGraphData();
-        });
+        this.setState(newState, () => this.updateGraphData());
+    };
+
+    handleChipDelete = chip => () => {
+        let newState = Object.assign({}, this.state);
+        const jobs = [...this.state.graphData.occupation];
+        const chipToDelete = jobs.indexOf(chip);
+        jobs.splice(chipToDelete, 1);
+        newState.graphData.occupation = jobs;
+        this.setState(newState);
     };
 
     componentDidMount = () => {
@@ -84,7 +94,7 @@ class Filters extends Component {
                 <ListItem>
                     <form className={classes.root}>
                         <FormInput
-                            title="Choose your graph"
+                            title="📊 Choose your graph"
                             name="currentGraph"
                             value={this.state.currentGraph}
                             onChange={this.handleChange}
@@ -96,7 +106,7 @@ class Filters extends Component {
                         />
                         <FormGroup row>
                             <FormInput
-                                title="Gender"
+                                title="🚻 Gender"
                                 name="gender"
                                 value={this.state.graphData.gender}
                                 onChange={this.handleChange}
@@ -106,7 +116,7 @@ class Filters extends Component {
                                 datasource={genderDatasource}
                             />
                             <FormInput
-                                title="Age"
+                                title="🔢 Age"
                                 name="age_range"
                                 value={this.state.graphData.age_range}
                                 onChange={this.handleChange}
@@ -116,6 +126,45 @@ class Filters extends Component {
                                 datasource={ageDatasource}
                             />
                         </FormGroup>
+                        <FormInput
+                            title="🌍 Location"
+                            name="location"
+                            value={this.state.graphData.location}
+                            onChange={this.handleChange}
+                            fullWidth={true}
+                            disabled={this.state.disableFilters}
+                            className={formControlClassName}
+                            datasource={locationDatasource}
+                        />
+                        <FormControl fullWidth={true} disabled={this.state.disableFilters}>
+                            <InputLabel htmlFor="occupation">Job</InputLabel>
+                            <Select
+                                multiple
+                                value={this.state.graphData.occupation}
+                                onChange={this.handleChange}
+                                input={<Input id="occupation" />}
+                                inputProps={{ name: "occupation", id: "occupation" }}
+                                MenuProps={MenuProps}
+                                renderValue={selected => (
+                                    <div className={classes.chips}>
+                                        {selected.map(value =>
+                                            <Chip
+                                                key={value}
+                                                label={value}
+                                                className={classes.chip}
+                                                onDelete={this.handleChipDelete(value)}
+                                            />)}
+                                    </div>
+                                )}
+                            >
+                                {jobDatasource.map(job => (
+                                    <MenuItem key={job} value={job}>
+                                        <Checkbox checked={this.state.graphData.occupation.indexOf(job) > -1} />
+                                        <ListItemText primary={job} />
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
                     </form>
                 </ListItem >
             </Fragment>
