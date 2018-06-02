@@ -1,10 +1,12 @@
+const containerWidth = 232;
 const styles = theme => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
+        minWidth: containerWidth,
     },
     formControl: {
-        minWidth: 232,
+        minWidth: (containerWidth / 2) - theme.spacing.unit,
     },
     formControlMoveRight: {
         transform: 'translate3d(' + theme.spacing.unit * 6 + 'px, 0, 0)',
@@ -19,6 +21,12 @@ const styles = theme => ({
             duration: theme.transitions.duration.leavingScreen,
             easing: theme.transitions.easing.sharp,
         }),
+    },
+    formControlLeft: {
+        marginRight: theme.spacing.unit,
+    },
+    formControlRight: {
+        marginLeft: theme.spacing.unit,
     },
 });
 
