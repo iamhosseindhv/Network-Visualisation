@@ -15,8 +15,8 @@ const getAvailableGraphs = async () => {
 }
 
 
-const getGraphData = async (graphId) => {
-    // const url = '/api/graph_data/' + graphId;
+const getGraphData = async (query) => {
+    // const url = '/api/graph_data/' + query.graph_id;
     // const response = await fetch(url);
     // const body = await response.json();
     // if (response.status !== 200) throw Error(body.message);
