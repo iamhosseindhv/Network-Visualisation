@@ -10,31 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import SearchIcon from '@material-ui/icons/Search';
 import Subheader from '../Subheader/Subheader';
 import Utils from '../utils/communications';
-
-
-const styles = theme => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    formControl: {
-        minWidth: 232,
-    },
-    formControlMoveRight: {
-        transform: 'translate3d(' + theme.spacing.unit * 6 + 'px, 0, 0)',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.leavingScreen,
-            easing: theme.transitions.easing.sharp,
-        }),
-    },
-    formControlMoveLeft: {
-        transform: 'translate3d(0, 0, 0)',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.leavingScreen,
-            easing: theme.transitions.easing.sharp,
-        }),
-    },
-});
+import styles from './Filters.styles';
 
 /* full version of a state
 this.state = {
