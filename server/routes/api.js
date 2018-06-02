@@ -24,6 +24,7 @@ router.get('/available_graphs/:user_id', (req, res) => {
 
 
 router.get('/graph_data/:graph_id', (req, res) => {
+    // Notice: all parameters are always present. you have to check if strings are === '' or arrays are == []
     // TODO: Before sending the results, you should check if the data is a valid graph data
     // e.g. if someone asks for data of a graph with id=1000, where there isn't a graph with the given id, 
     // then we return a response where there's no data for node and link.
@@ -36,8 +37,8 @@ router.get('/graph_data/:graph_id', (req, res) => {
             nodes = results;
             return db.query('SELECT * FROM links WHERE graph_id = ?', [graph_id]);
         })
-        .then(results => { links = results; } )
-        .then(() => res.json({ links: links, nodes: nodes }) )
+        .then(results => { links = results; })
+        .then(() => res.json({ links: links, nodes: nodes }))
         .catch(handleError);
 });
 
