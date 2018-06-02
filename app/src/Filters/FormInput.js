@@ -51,7 +51,7 @@ FormInput.propTypes = {
     /**
      * styles
      */
-    className: PropTypes.object.isRequired,
+    className: PropTypes.string.isRequired,
     /**
      * data to be shown as options
      */
@@ -59,7 +59,7 @@ FormInput.propTypes = {
     /**
      * secondary styles (if any)
      */
-    secondaryClassName: PropTypes.object,
+    secondaryClassName: PropTypes.string,
     /**
      * input is disables (default to false)
      */
