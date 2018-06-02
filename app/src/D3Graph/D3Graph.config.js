@@ -2,12 +2,12 @@
 const theme = {
     dark: {
         node: {
-            color: 'red',
+            color: '#999',
             highlightColor: 'lightgreen',
             fontColor: '#f2f2f2',
         },
         link: {
-            highlightColor: '#484848',
+            highlightColor: '#eee',
         },
     },
     light: {
