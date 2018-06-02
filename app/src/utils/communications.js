@@ -1,6 +1,4 @@
-
-import data from '../data';
-
+import data from '../utils/data';
 
 const getAvailableGraphs = async () => {
     // const user_id = 1;
@@ -14,7 +12,6 @@ const getAvailableGraphs = async () => {
     return graphs;
 }
 
-
 const getGraphData = async (query) => {
     // const url = '/api/graph_data/' + query.graph_id;
     // const response = await fetch(url);
@@ -27,8 +24,7 @@ const getGraphData = async (query) => {
     return data;
 };
 
-
-export default {
+export default { 
     getAvailableGraphs,
     getGraphData,
 };
