@@ -2,12 +2,9 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
 import ListItem from '@material-ui/core/ListItem';
 import FormGroup from '@material-ui/core/FormGroup';
-import FormControl from '@material-ui/core/FormControl';
 import SearchIcon from '@material-ui/icons/Search';
 import Chip from '@material-ui/core/Chip';
 import Input from '@material-ui/core/Input';
@@ -79,6 +76,20 @@ class Filters extends Component {
         this.setState(newState);
     };
 
+    handleChipRender = classes => chips => {
+        return (
+            <div className={classes.chips}>
+                {chips.map(item =>
+                    <Chip
+                        key={item}
+                        label={item}
+                        className={classes.chip}
+                        onDelete={this.handleChipDelete(item)}
+                    />)}
+            </div>
+        );
+    };
+
     componentDidMount = () => {
         Utils.getAvailableGraphs()
             .then(data => this.setState({ availableGraphs: data }))
@@ -136,35 +147,26 @@ class Filters extends Component {
                             className={formControlClassName}
                             datasource={locationDatasource}
                         />
-                        <FormControl fullWidth={true} disabled={this.state.disableFilters}>
-                            <InputLabel htmlFor="occupation">Job</InputLabel>
-                            <Select
-                                multiple
-                                value={this.state.graphData.occupation}
-                                onChange={this.handleChange}
-                                input={<Input id="occupation" />}
-                                inputProps={{ name: "occupation", id: "occupation" }}
-                                MenuProps={MenuProps}
-                                renderValue={selected => (
-                                    <div className={classes.chips}>
-                                        {selected.map(value =>
-                                            <Chip
-                                                key={value}
-                                                label={value}
-                                                className={classes.chip}
-                                                onDelete={this.handleChipDelete(value)}
-                                            />)}
-                                    </div>
-                                )}
-                            >
-                                {jobDatasource.map(job => (
-                                    <MenuItem key={job} value={job}>
-                                        <Checkbox checked={this.state.graphData.occupation.indexOf(job) > -1} />
-                                        <ListItemText primary={job} />
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                        {/* 1. make chips to come together instead under each other
+                               and put a max height for job container to avoid problems when too may chips */}
+                        <FormInput
+                            title="💼 Job"
+                            name="occupation"
+                            value={this.state.graphData.occupation}
+                            onChange={this.handleChange}
+                            fullWidth={true}
+                            multiple={true}
+                            input={<Input id="occupation" />}
+                            MenuProps={MenuProps}
+                            disabled={this.state.disableFilters}
+                            renderValue={this.handleChipRender(classes)}
+                            datasource={jobDatasource.map(job => (
+                                <MenuItem key={job} value={job}>
+                                    <Checkbox checked={this.state.graphData.occupation.indexOf(job) > -1} />
+                                    <ListItemText primary={job} />
+                                </MenuItem>
+                            ))}
+                        />
                     </form>
                 </ListItem >
             </Fragment>
