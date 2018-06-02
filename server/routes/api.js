@@ -24,6 +24,10 @@ router.get('/available_graphs/:user_id', (req, res) => {
 
 
 router.get('/graph_data/:graph_id', (req, res) => {
+    // TODO: Before sending the results, you should check if the data is a valid graph data
+    // e.g. if someone asks for data of a graph with id=1000, where there isn't a graph with the given id, 
+    // then we return a response where there's no data for node and link.
+    // our auery has worked, everything is fine, but this is not a valid data to be displayed as a graph.
     const graph_id = req.params.graph_id;
     var db = require('../database');
     var nodes, links;
