@@ -58,7 +58,7 @@ class CollapsibleDrawer extends Component {
                 <Divider />
                 <Form onChange={onChangeForm} />
                 <Divider />
-                <Filters onChangeData={onChangeData} />
+                <Filters open={this.state.open} onChangeData={onChangeData} />
             </Drawer>
         );
     }
