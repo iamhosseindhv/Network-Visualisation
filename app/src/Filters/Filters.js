@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItem from '@material-ui/core/ListItem';
 import FormGroup from '@material-ui/core/FormGroup';
-import SearchIcon from '@material-ui/icons/Search';
+import FilterIcon from '@material-ui/icons/FilterList';
 import Chip from '@material-ui/core/Chip';
 import Input from '@material-ui/core/Input';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -108,7 +108,7 @@ class Filters extends Component {
         const formControlClassName = classNames(classes.formControl, open ? classes.formControlMoveLeft : classes.formControlMoveRight);
         return (
             <Fragment>
-                <Subheader id="graph-search" title="Search" icon={<SearchIcon />} />
+                <Subheader id="graph-filter" title="Filters" icon={<FilterIcon />} />
                 <form className={classes.root}>
                     <FormInput
                         title="📊 Choose your graph"

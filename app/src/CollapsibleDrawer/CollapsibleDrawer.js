@@ -25,6 +25,8 @@ class CollapsibleDrawer extends Component {
 
     handleDrawerToggle = () => { this.setState({ open: !this.state.open }) };
 
+    handleClick = () => { !this.state.open && this.handleDrawerToggle() };
+
     render() {
         const {
             classes,
@@ -45,11 +47,11 @@ class CollapsibleDrawer extends Component {
                     <Typography variant="title" color="inherit" noWrap> Mini variant drawer </Typography>
                 </Toolbar>
             </AppBar> */
-
             <Drawer
                 variant="permanent"
                 classes={{ paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose), }}
                 open={this.state.open}
+                onClick={this.handleClick}
             >
                 <div className={classes.toolbar}>
                     <IconButton onClick={this.handleDrawerToggle}>
@@ -83,7 +85,7 @@ CollapsibleDrawer.propTypes = {
      */
     onChangeData: PropTypes.func.isRequired,
     /**
-     * @param {boolean} event boolean value to determine we are loading graph data or not
+     * @param {boolean} boolean value to determine we are loading graph data or not
      */
     onLoading: PropTypes.bool.isRequired,
 };
