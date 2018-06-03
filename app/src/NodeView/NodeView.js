@@ -6,7 +6,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
-import InfoIcon from '@material-ui/icons/Info';
 import Drawer from '@material-ui/core/Drawer';
 import styles from './NodeView.styles';
 

@@ -8,6 +8,7 @@ const styles = theme => ({
         minWidth: containerWidth,
         paddingLeft: theme.spacing.unit * 3,
         paddingRight: theme.spacing.unit * 3,
+        overflowX: 'hidden',
     },
     formControl: {
         marginBottom: theme.spacing.unit,

@@ -28,8 +28,8 @@ const getDefaultConfig = (themeType) => {
             nodeHighlightBehavior: true,
             automaticRearrangeAfterDropNode: true,
             highlightOpacity: 0.2,
-            height: 800,
-            width: 1200,
+            height: window.innerHeight,
+            width: window.innerWidth,
         },
         node: {
             color: theme[themeType].node.color,

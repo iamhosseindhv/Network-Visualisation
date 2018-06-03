@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
-import ListItem from '@material-ui/core/ListItem';
 import FormGroup from '@material-ui/core/FormGroup';
 import FilterIcon from '@material-ui/icons/FilterList';
 import Chip from '@material-ui/core/Chip';
@@ -144,34 +143,34 @@ class Filters extends Component {
                         />
                     </FormGroup>
                     <FormInput
-                        title="🌍 Location"
-                        name="location"
-                        value={this.state.graphData.location}
-                        onChange={this.handleChange}
-                        fullWidth={true}
-                        disabled={this.state.disableFilters}
-                        className={formControlClassName}
-                        datasource={locationDatasource}
-                    />
+                            title="🌍 Location"
+                            name="location"
+                            value={this.state.graphData.location}
+                            onChange={this.handleChange}
+                            fullWidth={true}
+                            disabled={this.state.disableFilters}
+                            className={formControlClassName}
+                            datasource={locationDatasource}
+                        />
                     <FormInput
-                        title="💼 Job"
-                        name="occupation"
-                        value={this.state.graphData.occupation}
-                        onChange={this.handleChange}
-                        fullWidth={true}
-                        multiple={true}
-                        input={<Input id="occupation" />}
-                        MenuProps={MenuProps}
-                        className={formControlClassName}
-                        disabled={this.state.disableFilters}
-                        renderValue={this.handleChipRender(classes)}
-                        datasource={jobDatasource.map(job => (
-                            <MenuItem key={job} value={job}>
-                                <Checkbox color="primary" checked={this.state.graphData.occupation.indexOf(job) > -1} />
-                                <ListItemText primary={job} />
-                            </MenuItem>
-                        ))}
-                    />
+                            title="💼 Job"
+                            name="occupation"
+                            value={this.state.graphData.occupation}
+                            onChange={this.handleChange}
+                            fullWidth={true}
+                            multiple={true}
+                            input={<Input id="occupation" />}
+                            MenuProps={MenuProps}
+                            className={formControlClassName}
+                            disabled={this.state.disableFilters}
+                            renderValue={this.handleChipRender(classes)}
+                            datasource={jobDatasource.map(job => (
+                                <MenuItem key={job} value={job}>
+                                    <Checkbox color="primary" checked={this.state.graphData.occupation.indexOf(job) > -1} />
+                                    <ListItemText primary={job} />
+                                </MenuItem>
+                            ))}
+                        />
                 </form>
             </Fragment>
         );
