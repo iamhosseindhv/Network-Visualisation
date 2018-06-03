@@ -2,13 +2,34 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Graph } from '../react-d3-graph';
+import Fade from '@material-ui/core/Fade';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import DialpadIcon from '@material-ui/icons/Dialpad';
 import { createConfig } from './D3Graph.config';
 import NodeView from '../NodeView/NodeView';
 import styles from './D3Graph.styles';
 
-import Fade from '@material-ui/core/Fade';
-import LinearProgress from '@material-ui/core/LinearProgress';
+const LoadingIndicator = props => {
+    return (
+        <div className={props.placeholderDark}>
+            <Fade in={props.in} unmountOnExit>
+                <LinearProgress />
+            </Fade>
+        </div>
+    );
+}
 
+const NoDataLabel = props => {
+    const classes = props.className;
+    return (
+        <div className={classes.loadingContainer}>
+            <div className={classes.innerContainer}>
+                <DialpadIcon className={classes.icon} style={{ width: 64, height: 64 }} iconStyle={{ fontSize: 40 }} />
+                <h2>No Data Available</h2>
+            </div>
+        </div>
+    );
+}
 
 class D3Graph extends Component {
     constructor(props) {
@@ -51,32 +72,28 @@ class D3Graph extends Component {
         }
     }
 
-    onMouseOverNode = node => { /*console.log(`Mouse is over node (${node})`);*/ }
-
-    onMouseOutNode = node => { /*console.log(`Mouse is out of node (${node})`);*/ }
-
     handleClose = () => {
         this.setState({
             drawerOpen: false,
             presentDrawer: false,
         });
-    };
+    }
 
     render() {
         const { classes, loading } = this.props;
         if (!this.state.shouldRenderGraph) {
             return (
                 <main className={classes.content}>
-                    <div className={classes.placeholder}>
-                        <Fade in={loading} style={{ width: '100% !important' }} unmountOnExit>
-                            <LinearProgress />
-                        </Fade>
-                    </div>
-                    <h2>waiting for data...</h2>
+                    <LoadingIndicator className={classes.placeholderDark} in={loading} />
+                    <NoDataLabel className={{
+                        loadingContainer: classes.loadingContainer,
+                        innerContainer: classes.innerContainer,
+                        icon: classes.icon
+                    }}
+                    />
                 </main >
             );
         }
-
         const data = {
             nodes: this.state.data.nodes,
             links: this.state.data.links
@@ -92,11 +109,7 @@ class D3Graph extends Component {
         };
         return (
             <main className={classes.content}>
-                <div className={classes.placeholder}>
-                    <Fade in={loading} style={{ width: '100% !important' }} unmountOnExit>
-                        <LinearProgress />
-                    </Fade>
-                </div>
+                <LoadingIndicator className={classes.placeholder} in={loading} />
                 <NodeView
                     open={this.state.drawerOpen}
                     node={this.state.highlightedNode}
