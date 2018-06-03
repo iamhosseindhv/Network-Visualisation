@@ -6,6 +6,8 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         minWidth: containerWidth,
+        paddingLeft: theme.spacing.unit * 3,
+        paddingRight: theme.spacing.unit * 3,
     },
     formControl: {
         marginBottom: theme.spacing.unit,

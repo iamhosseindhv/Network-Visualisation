@@ -12,6 +12,7 @@ class App extends Component {
             graphData: {},
             graphConfig: {},
             theme: getMuiTheme(),
+            isLoading: false,
         };
     }
 
@@ -27,12 +28,14 @@ class App extends Component {
 
     onChangeData = data => { this.setState({ graphData: data }) };
 
+    onLoading = isLoading => { this.setState({ isLoading }) };
+
     render() {
         return (
             <MuiThemeProvider theme={this.state.theme}>
                 <RootWrapper>
-                    <CollapsibleDrawer onChangeForm={this.onChangeForm} onChangeData={this.onChangeData} />
-                    <D3Graph data={this.state.graphData} config={this.state.graphConfig} />
+                    <CollapsibleDrawer onChangeForm={this.onChangeForm} onChangeData={this.onChangeData} onLoading={this.onLoading} />
+                    <D3Graph data={this.state.graphData} config={this.state.graphConfig} loading={this.state.isLoading} />
                 </RootWrapper>
             </MuiThemeProvider>
         );

@@ -44,9 +44,16 @@ class Filters extends Component {
             graph_id: selectedGraph.id,
             ...this.state.graphData,
         };
+        this.props.onLoading(true);
         Utils.getGraphData(query)
-            .then(graphData => this.props.onChangeData(graphData))
-            .catch(this.handleError);
+            .then(graphData => {
+                this.props.onChangeData(graphData);
+                this.props.onLoading(false);
+            })
+            .catch(err => {
+                this.handleError(err);
+                this.props.onLoading(false);
+            })
     };
 
     handleError = err => {
@@ -102,72 +109,70 @@ class Filters extends Component {
         return (
             <Fragment>
                 <Subheader id="graph-search" title="Search" icon={<SearchIcon />} />
-                <ListItem>
-                    <form className={classes.root}>
+                <form className={classes.root}>
+                    <FormInput
+                        title="📊 Choose your graph"
+                        name="currentGraph"
+                        value={this.state.currentGraph}
+                        onChange={this.handleChange}
+                        fullWidth={true}
+                        className={formControlClassName}
+                        datasource={this.state.availableGraphs.map(graph => {
+                            return <MenuItem key={graph.id} value={graph.name}>{graph.name}</MenuItem>
+                        })}
+                    />
+                    <FormGroup row>
                         <FormInput
-                            title="📊 Choose your graph"
-                            name="currentGraph"
-                            value={this.state.currentGraph}
+                            title="🚻 Gender"
+                            name="gender"
+                            value={this.state.graphData.gender}
                             onChange={this.handleChange}
-                            fullWidth={true}
                             className={formControlClassName}
-                            datasource={this.state.availableGraphs.map(graph => {
-                                return <MenuItem key={graph.id} value={graph.name}>{graph.name}</MenuItem>
-                            })}
-                        />
-                        <FormGroup row>
-                            <FormInput
-                                title="🚻 Gender"
-                                name="gender"
-                                value={this.state.graphData.gender}
-                                onChange={this.handleChange}
-                                className={formControlClassName}
-                                secondaryClassName={classes.formControlLeft}
-                                disabled={this.state.disableFilters}
-                                datasource={genderDatasource}
-                            />
-                            <FormInput
-                                title="🔢 Age"
-                                name="age_range"
-                                value={this.state.graphData.age_range}
-                                onChange={this.handleChange}
-                                className={formControlClassName}
-                                secondaryClassName={classes.formControlRight}
-                                disabled={this.state.disableFilters}
-                                datasource={ageDatasource}
-                            />
-                        </FormGroup>
-                        <FormInput
-                            title="🌍 Location"
-                            name="location"
-                            value={this.state.graphData.location}
-                            onChange={this.handleChange}
-                            fullWidth={true}
+                            secondaryClassName={classes.formControlLeft}
                             disabled={this.state.disableFilters}
-                            className={formControlClassName}
-                            datasource={locationDatasource}
+                            datasource={genderDatasource}
                         />
                         <FormInput
-                            title="💼 Job"
-                            name="occupation"
-                            value={this.state.graphData.occupation}
+                            title="🔢 Age"
+                            name="age_range"
+                            value={this.state.graphData.age_range}
                             onChange={this.handleChange}
-                            fullWidth={true}
-                            multiple={true}
-                            input={<Input id="occupation" />}
-                            MenuProps={MenuProps}
                             className={formControlClassName}
+                            secondaryClassName={classes.formControlRight}
                             disabled={this.state.disableFilters}
-                            renderValue={this.handleChipRender(classes)}
-                            datasource={jobDatasource.map(job => (
-                                <MenuItem key={job} value={job}>
-                                    <Checkbox color="primary" checked={this.state.graphData.occupation.indexOf(job) > -1} />
-                                    <ListItemText primary={job} />
-                                </MenuItem>
-                            ))}
+                            datasource={ageDatasource}
                         />
-                    </form>
-                </ListItem >
+                    </FormGroup>
+                    <FormInput
+                        title="🌍 Location"
+                        name="location"
+                        value={this.state.graphData.location}
+                        onChange={this.handleChange}
+                        fullWidth={true}
+                        disabled={this.state.disableFilters}
+                        className={formControlClassName}
+                        datasource={locationDatasource}
+                    />
+                    <FormInput
+                        title="💼 Job"
+                        name="occupation"
+                        value={this.state.graphData.occupation}
+                        onChange={this.handleChange}
+                        fullWidth={true}
+                        multiple={true}
+                        input={<Input id="occupation" />}
+                        MenuProps={MenuProps}
+                        className={formControlClassName}
+                        disabled={this.state.disableFilters}
+                        renderValue={this.handleChipRender(classes)}
+                        datasource={jobDatasource.map(job => (
+                            <MenuItem key={job} value={job}>
+                                <Checkbox color="primary" checked={this.state.graphData.occupation.indexOf(job) > -1} />
+                                <ListItemText primary={job} />
+                            </MenuItem>
+                        ))}
+                    />
+                </form>
             </Fragment>
         );
     }
@@ -191,6 +196,10 @@ Filters.propTypes = {
      * @param {object} event The event source of the callback
      */
     onChangeData: PropTypes.func.isRequired,
+    /**
+     * @param {boolean} event boolean value to determine we are loading graph data or not
+     */
+    onLoading: PropTypes.bool.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(Filters);

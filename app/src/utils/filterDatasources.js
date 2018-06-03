@@ -9,7 +9,7 @@ const ageDatasource = ['20-25', '25-30', '30-40', '40-50', '50-60', '60-100'].ma
     return <MenuItem key={i} value={age}>{age}</MenuItem>
 });
 
-const locationDatasource = ['Canada', 'Iran', 'United Kingdom', 'Estonia', 'Australia'].map((age, i) => {
+const locationDatasource = ['🇨🇦 Canada', '🇮🇷 Iran', '🇬🇧 United Kingdom', '🇪🇪 Estonia', '🇦🇺 Australia'].map((age, i) => {
     return <MenuItem key={i} value={age}>{age}</MenuItem>
 });
 

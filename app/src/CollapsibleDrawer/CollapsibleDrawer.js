@@ -28,6 +28,7 @@ class CollapsibleDrawer extends Component {
     render() {
         const {
             classes,
+            onLoading,
             onChangeForm,
             onChangeData,
         } = this.props;
@@ -58,7 +59,7 @@ class CollapsibleDrawer extends Component {
                 <Divider />
                 <Form open={this.state.open} onChange={onChangeForm} />
                 <Divider />
-                <Filters open={this.state.open} onChangeData={onChangeData} />
+                <Filters open={this.state.open} onLoading={onLoading} onChangeData={onChangeData} />
             </Drawer>
         );
     }
@@ -81,6 +82,10 @@ CollapsibleDrawer.propTypes = {
      * @param {object} event The event source of the callback
      */
     onChangeData: PropTypes.func.isRequired,
+    /**
+     * @param {boolean} event boolean value to determine we are loading graph data or not
+     */
+    onLoading: PropTypes.bool.isRequired,
 };
 
 

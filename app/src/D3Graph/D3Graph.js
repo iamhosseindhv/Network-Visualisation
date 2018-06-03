@@ -6,6 +6,10 @@ import { createConfig } from './D3Graph.config';
 import NodeView from '../NodeView/NodeView';
 import styles from './D3Graph.styles';
 
+import Fade from '@material-ui/core/Fade';
+import LinearProgress from '@material-ui/core/LinearProgress';
+
+
 class D3Graph extends Component {
     constructor(props) {
         super(props);
@@ -59,9 +63,18 @@ class D3Graph extends Component {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, loading } = this.props;
         if (!this.state.shouldRenderGraph) {
-            return <h2>waiting for data...</h2>;
+            return (
+                <main className={classes.content}>
+                    <div className={classes.placeholder}>
+                        <Fade in={loading} style={{ width: '100% !important' }} unmountOnExit>
+                            <LinearProgress />
+                        </Fade>
+                    </div>
+                    <h2>waiting for data...</h2>
+                </main >
+            );
         }
 
         const data = {
@@ -79,6 +92,11 @@ class D3Graph extends Component {
         };
         return (
             <main className={classes.content}>
+                <div className={classes.placeholder}>
+                    <Fade in={loading} style={{ width: '100% !important' }} unmountOnExit>
+                        <LinearProgress />
+                    </Fade>
+                </div>
                 <NodeView
                     open={this.state.drawerOpen}
                     node={this.state.highlightedNode}
@@ -108,6 +126,10 @@ D3Graph.propTypes = {
      * Configurations of the graph
      */
     config: PropTypes.object.isRequired,
+    /**
+     * @param {boolean} boolean value to determine we are loading graph data or not
+     */
+    loading: PropTypes.bool.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(D3Graph);
