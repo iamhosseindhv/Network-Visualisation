@@ -20,11 +20,11 @@ const getGraphData = async (query) => {
     // return body;
 
     //fake async
-    // console.log('Getting data for ' + graphId);
+    await new Promise(resolve => setTimeout(resolve, 2000));
     return data;
 };
 
-export default { 
+export default {
     getAvailableGraphs,
     getGraphData,
 };
