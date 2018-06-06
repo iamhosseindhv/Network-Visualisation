@@ -24,7 +24,7 @@ const NoDataLabel = props => {
     return (
         <div className={classes.loadingContainer}>
             <div className={classes.innerContainer}>
-                <DialpadIcon className={classes.icon} style={{ width: 64, height: 64 }} iconStyle={{ fontSize: 40 }} />
+                <DialpadIcon className={classes.icon} style={{ width: 64, height: 64 }} />
                 <h2>No Data Available</h2>
             </div>
         </div>
