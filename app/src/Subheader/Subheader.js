@@ -61,6 +61,10 @@ Subheader.propTypes = {
      * An icon component (e.g. <SearchIcon />)
      */
     icon: PropTypes.node.isRequired,
+    /**
+     * styling applied to the list item e.g. padding: 0
+     */
+    listStyle: PropTypes.string,
 };
 
 export default withStyles(styles, { withTheme: true })(Subheader);
