@@ -24,9 +24,10 @@ class Subheader extends Component {
             id,
             title,
             icon,
+            listStyle,
         } = this.props;
         return (
-            <ListItem>
+            <ListItem className={listStyle}>
                 <ListItemIcon>
                     {icon}
                 </ListItemIcon>
