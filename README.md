@@ -1,11 +1,19 @@
 # Network Visualisation 
-A simple network (graph) visualisation using [d3](https://github.com/d3/d3) and [React](https://reactjs.org/)
+A simple network (graph) visualisation using [d3](https://github.com/d3/d3) and [React](https://reactjs.org/).
+
+Table of Content
+--
+- [Screenshots](#screenshots)
+- [Usage](#usage)
+- [TODO list](#todo-list)
+- [Contact](#contact)
+- [License](#license)
 
 Screenshots
 --
 - [Load data](#load-data)
 - [Apply Filter](#apply-filter)
-- [Dark Mode - Static/Dynamic Graph](#dark-mode-static/dynamic-graph)
+- [Dark Mode - Static/Dynamic Graph](#dark-mode---static/dynamic-graph)
 - [Other](#other)
 
 
@@ -28,8 +36,8 @@ follow the instructions: 👇🏼
 
 ```
 // step 1: clone the repository.
-git clone https://github.com/iamhosseindhv/React-Express-boilerplate.git react-express-boilerplate
-cd react-express-boilerplate
+git clone https://github.com/iamhosseindhv/Network-Visualisation.git network-viz
+cd network-viz
 
 // step 2: install dependencies in the root of the project and `app` directory.
 cd app && npm install && cd ../ && npm install
@@ -38,7 +46,7 @@ cd app && npm install && cd ../ && npm install
 npm run dev
 ```
 
-Your app should be running on port 3000. 👉 `http://localhost:3000/`
+Your app should be running on port 3000. 👉🏼 `http://localhost:3000/`
 
 
 
@@ -49,7 +57,7 @@ Your app should be running on port 3000. 👉 `http://localhost:3000/`
 
 
 
-## Author - Contact
+## Contact
 Hossein Dehnokhalaji
 
 <a href="https://www.facebook.com/iamhosseindhv"><img src="https://github.com/iamhosseindhv/Rentaly/blob/master/Gifs/facebook.png" alt="Hossein Dehnokhalaji Linkedin profile" align="right" width="32" height="32"/></a>
