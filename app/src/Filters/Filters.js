@@ -196,9 +196,9 @@ Filters.propTypes = {
      */
     onChangeData: PropTypes.func.isRequired,
     /**
-     * @param {boolean} event boolean value to determine we are loading graph data or not
+     * func value to determine we are loading graph data or not
      */
-    onLoading: PropTypes.bool.isRequired,
+    onLoading: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(Filters);
