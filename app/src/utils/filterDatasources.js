@@ -13,8 +13,8 @@ const locationDatasource = ['🇨🇦 Canada', '🇮🇷 Iran', '🇬🇧 United
     return <MenuItem key={i} value={age}>{age}</MenuItem>
 });
 
-const jobDatasource = ['Oliver Hansen', 'Van Henry', 'April Tucker', 'Ralph Hubbard', 'Omar Alexander',
-    'Carlos Abbott', 'Miriam Wagner', 'Bradley Wilkerson', 'Virginia Andrews', 'Kelly Snyder'];
+const jobDatasource = ['Marketing Manager', 'Studio Manager', 'Lawyer', 'Banker', 'Accountant',
+    'Software Engineer', 'Freelancer', 'Financial Manager'];
 
 
 export {
