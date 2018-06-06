@@ -48,7 +48,14 @@ const styles = theme => ({
         alignItems: 'center',
         justifyContent: 'flex-end',
         padding: '0 8px',
+        backgroundColor: theme.palette.background.default,
         ...theme.mixins.toolbar,
+    },
+    icon: {
+        color: theme.palette.primary.main,
+    },
+    headerStyle: {
+        padding: theme.spacing.unit * 1.5,
     },
 });
 
