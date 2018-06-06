@@ -23,7 +23,7 @@ class NodeView extends Component {
     omitKeys = (obj) => {
         let dup = {};
         for (let key in obj) {
-            if (NODE_KEY_BLACKLIST.indexOf(key) == -1) {
+            if (NODE_KEY_BLACKLIST.indexOf(key) === -1) {
                 dup[key] = obj[key];
             }
         }
