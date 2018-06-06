@@ -11,7 +11,7 @@ I'll update this `README` from time to time to demonstrate the gradual progress.
 <kbd><img src="https://i.imgur.com/aMxrxOL.gif"/><kbd> 
 
 ## Dark Mode - Static/Dynamic Graph
-<kbd><img src="https://i.imgur.com/6jOOU4b.gif"/><kbd>  
+<kbd><img src="https://i.imgur.com/d9ITyfQ.gif"/><kbd>  
 
 ## Screenshots
 <kbd><img src="https://i.imgur.com/9945tmZ.gif"/><kbd>
