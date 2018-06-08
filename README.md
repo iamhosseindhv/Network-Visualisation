@@ -18,10 +18,10 @@ Screenshots
 
 
 ### Load data
-<kbd><img src="https://i.imgur.com/C8CIcYy.gif"/><kbd>  
+<kbd><img src="https://i.imgur.com/4wQTxHr.gif"/><kbd>  
 
 ### Apply Filter
-<kbd><img src="https://i.imgur.com/aMxrxOL.gif"/><kbd> 
+<kbd><img src="https://i.imgur.com/rA4EZ6Q.gif"/><kbd> 
 
 ### Dark Mode Static/Dynamic Graph
 <kbd><img src="https://i.imgur.com/d9ITyfQ.gif"/><kbd>  
