@@ -35,14 +35,16 @@ follow the instructions: 👇🏼
 
 
 ```
-// step 1: clone the repository.
+// Step 1: clone the repository.
 git clone https://github.com/iamhosseindhv/Network-Visualisation.git network-viz
 cd network-viz
 
-// step 2: install dependencies in the root of the project and `app` directory.
+// Step 2: install dependencies in the root of the project and `app` directory.
 cd app && npm install && cd ../ && npm install
 
-// step 3: now that you have all the dependencies, start both the server and client at the same time (from the root of the project) by following command:
+// Step 3: now that you have all the dependencies installed, 
+// start both the server and client at the same time (from the
+// root of the project) by following command:
 npm run dev
 ```
 
@@ -53,8 +55,7 @@ Your app should be running on port 3000. 👉🏼 `http://localhost:3000/`
 ## TODO list
 - [x] Completed
 - [ ] Write tests
-- [ ] UI to import data to the database
-
+- [ ] Support for importing data to the database
 
 
 ## Contact
